@@ -1,32 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
-    <link type="text/css" rel="stylesheet" th:href="@{/css/loading.css}">
-
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/css/form.css}">
 </head>
+
 <body>
-<div class="center" id="loader">
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-</div>
-<div class="form-style-5">
-    <form method="post" th:action="@{/login}">
-        <fieldset>
-            <legend><span class="number">CFS</span> Sign In</legend>
-            <input type="text" name="username" placeholder="User Name" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <input type="submit" value="Login">
-        </fieldset>
+
+
+<div class="login-box">
+    <h2>Login</h2>
+
+    <form method="POST" th:action="@{/login}" id="login">
+        <div class="user-box">
+            <input type="text" name="username" required="">
+            <label>Username</label>
+        </div>
+        <div class="user-box">
+            <input type="password" name="password" required="">
+            <label>Password</label>
+        </div>
+        <button type="submit">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span> Login
+        </button>
         <div th:if="${param.error}">
             Invalid username and password.
         </div>
@@ -35,20 +36,7 @@
         </div>
     </form>
 </div>
-<script>
-    document.onreadystatechange = function() {
-        if (document.readyState !== "complete") {
-            document.querySelector(
-                "body").style.visibility = "hidden";
-            document.querySelector(
-                "#loader").style.visibility = "visible";
-        } else {
-            document.querySelector(
-                "#loader").style.display = "none";
-            document.querySelector(
-                "body").style.visibility = "visible";
-        }
-    };
-</script>
+
 </body>
+
 </html>
