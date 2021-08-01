@@ -1,15 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Board</title>
     <link type="text/css" rel="stylesheet" th:href="@{/css/Board.css}">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.6.6/dragula.min.js">
+    <!--    //ruined everything-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="fontawesome-free-5.15.1-web/css/all.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="https://kit.fontawesome.com/9e5d1913ca.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
-<header>
-    <h1>Drag & Drop<br/><span>To Do Board</span></h1>
-</header>
+<nav th:replace="fragments/nav :: nav"></nav>
+
 
 <div class="add-task-container">
     <input type="text" maxlength="12" id="taskText" placeholder="New Task..." onkeydown="if (event.keyCode == 13)
@@ -64,29 +73,17 @@
             <ul class="task-list" id="done">
                 <li class="task">
                     <p>Ideation</p>
+                    <div class="column-icons">
+                        <span class="add-icon"><i class="far fa-minus-square"></i> </span>
+                    </div>
                 </li>
                 <li class="task">
                     <p>Sketches</p>
+                    <div class="column-icons">
+                        <span class="add-icon"><i class="far fa-minus-square"></i> </span>
+                    </div>
                 </li>
             </ul>
-        </li>
-
-        <li class="column trash-column">
-            <div class="column-header">
-                <h4>Trash</h4>
-            </div>
-            <ul class="task-list" id="trash">
-                <li class="task">
-                    <p>Interviews</p>
-                </li>
-                <li class="task">
-                    <p>Research</p>
-                </li>
-
-            </ul>
-            <div class="column-button">
-                <button class="button delete-button" onclick="emptyTrash()">Delete</button>
-            </div>
         </li>
 
     </ul>
@@ -98,3 +95,74 @@
 <script src="app.js"></script>
 </body>
 </html>
+
+
+<!--<div class="main-container">-->
+<!--    <ul class="columns ">-->
+<!--        <li class="column to-do-column">-->
+<!--            <div class="column-header">-->
+<!--                <h4>To Do-->
+<!--                </h4>-->
+
+<!--            </div>-->
+<!--            <ul class="task-list" id="to-do">-->
+<!--                <li class="task todo-row">-->
+<!--                    <p>Analysis </p>-->
+<!--                </li>-->
+<!--                <li class="task todo-row">-->
+<!--                    <p>Coding</p>-->
+<!--                </li>-->
+<!--                <li class="task todo-row">-->
+<!--                    <p>Card Sorting</p>-->
+<!--                </li>-->
+<!--                <li class="task todo-row">-->
+<!--                    <p>Measure</p>-->
+<!--                </li>-->
+<!--&lt;!&ndash;                <div class="column-icons">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <span class="add-icon"><i class="far fa-plus-square"></i> </span>&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+<!--            </ul>-->
+<!--        </li>-->
+
+<!--        <li class="column doing-column">-->
+<!--            <div class="column-header">-->
+<!--                <h4>Doing</h4>-->
+<!--            </div>-->
+<!--            <ul class="task-list" id="doing">-->
+<!--                <li class="task todo-row">-->
+<!--                    <p>Hypothesis</p>-->
+<!--                </li>-->
+<!--                <li class="task todo-row">-->
+<!--                    <p>User Testing</p>-->
+<!--                </li>-->
+<!--                <li class="task todo-row">-->
+<!--                    <p>Prototype</p>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </li>-->
+
+<!--        <li class="column done-column">-->
+<!--            <div class="column-header">-->
+<!--                <h4>Done</h4>-->
+<!--            </div>-->
+<!--            <ul class="task-list" id="done">-->
+<!--                <li class="task todo-row">-->
+<!--                    <p>Ideation</p>-->
+<!--                    <div class="column-icons">-->
+<!--                        <span class="add-icon"><i class="far fa-minus-square"></i></span>-->
+<!--                    </div>-->
+<!--                </li>-->
+<!--                <li class="task todo-row">-->
+<!--                    <p>Sketches</p>-->
+<!--                    <div class="column-icons">-->
+<!--                        <span class="add-icon"><i class="far fa-minus-square"></i> </span>-->
+<!--                    </div>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--</div>-->
+<!--<script src="https://kit.fontawesome.com/91631dcc93.js" crossorigin="anonymous"></script>-->
+<!--<script src="app.js"></script>-->
+<!--</body>-->
+<!--</html>-->
