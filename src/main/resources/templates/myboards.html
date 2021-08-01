@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>My Boards</title>
+    <link rel="stylesheet" href="fontawesome-free-5.15.1-web/css/all.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/index.css" ><script src="https://kit.fontawesome.com/9e5d1913ca.js" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="css/myboards.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
@@ -18,6 +21,8 @@
 
 </head>
 <body>
+    <nav th:replace="fragments/nav :: nav"></nav>
+
 <div class="space-edge">
 <div class="d-flex gap flex-wrap flex-start" >
 
@@ -75,7 +80,7 @@
         </div>
     </div>
 </div>
-</body>
 
+</body>
 <script href="modal.js"></script>
 </html>
