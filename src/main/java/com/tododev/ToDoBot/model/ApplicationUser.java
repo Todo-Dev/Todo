@@ -16,18 +16,21 @@ public class ApplicationUser implements UserDetails {
     private String username;
     private String password;
 
-
+    @OneToMany(mappedBy = "applicationUser")
+    List<BoardList> boardLists;
 
     public ApplicationUser(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public ApplicationUser() {
 
     }
 
-    public ApplicationUser () {
-
+    public List<BoardList> getBoardLists() {
+        return boardLists;
     }
-
 
     public void setUsername(String username) {
         this.username = username;

@@ -1,4 +1,5 @@
 
+alert("hello")
 function addTask() {
   /* Get task text from input */
   var inputTask = document.getElementById("taskText").value;
