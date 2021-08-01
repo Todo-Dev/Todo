@@ -9,4 +9,8 @@ public class MainController {
     public String getLoadingPage() {
         return "loading";
     }
+    @GetMapping("/Board")
+    public String getBoardPage() {
+        return "Board";
+    }
 }
