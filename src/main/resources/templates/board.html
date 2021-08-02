@@ -16,10 +16,9 @@
     <script src="https://kit.fontawesome.com/9e5d1913ca.js" crossorigin="anonymous"></script>
 
 </head>
+
 <body style="padding: 2rem">
 <nav th:replace="fragments/navfrag :: nav"></nav>
-
-
 <div class="add-task-container">
     <input type="text" maxlength="12" id="taskText" placeholder="New Task..." onkeydown="if (event.keyCode == 13)
                         document.getElementById('add').click()">
