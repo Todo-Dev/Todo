@@ -45,33 +45,7 @@
 //        return new RedirectView("/newBoard");
 //    }
 //    ---------------------------------------------------------------------------------------------
-//    <Form th:action="@{/newBoard}" method="post">
-//    <input type="text" name="boardName" required/>
-//    <input type="text" name="description" required/>
-//    <input type="submit" value="submit"/>
-//</Form>
 //
-//<div th:each="obj : ${board}">
-//    <h3 th:text="${obj.boardName}"></h3>
-//    <p th:text="${obj.description}"></p>
-//    <hr/>
-//    <h3>Section</h3>
-//    <form th:action="@{/newSection}" method="post">
-//        <input type="text" th:value="${obj.id}" name="id" hidden/>
-//        <input type="text" name="title"/>
-//        <input type="submit" value="submit">
-//    </form>
-//    <h3>Task</h3>
-//    <form th:action="@{/newTask}" method="post">
-//        <input type="text" name="taskName"/>
-//        <input type="text" name="description"/>
-//        <input type="submit" value="submit">
-//    </form>
-//    <div th:each="section : ${obj.getSections()} ">
-//        <p th:text="${section.title}"></p>
-//    </div>
-//    <hr/>
-//</div>
 //
 //    ---------------------------------------------------------------------------------------------------
 //
