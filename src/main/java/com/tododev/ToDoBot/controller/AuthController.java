@@ -49,4 +49,5 @@ public class AuthController {
         SecurityContextHolder.getContext().setAuthentication(auth);
         return new RedirectView("/");
     }
+
 }
