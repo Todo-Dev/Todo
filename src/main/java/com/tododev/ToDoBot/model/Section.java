@@ -1,6 +1,7 @@
 package com.tododev.ToDoBot.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -14,9 +15,18 @@ public class Section {
     @ManyToOne
     BoardList boardList;
 
+    @OneToMany(mappedBy = "section")
+    List<Task> taskList;
+
+
     public Section(String title, BoardList boardList) {
         this.title = title;
         this.boardList = boardList;
+    }
+
+
+    public List<Task> getTaskList() {
+        return taskList;
     }
 
     public Section() {

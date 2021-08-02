@@ -16,23 +16,23 @@
     <script src="https://kit.fontawesome.com/9e5d1913ca.js" crossorigin="anonymous"></script>
 
 </head>
-<body style="padding: 2rem">
-<nav th:replace="fragments/nav :: nav"></nav>
+<body>
+<nav th:replace="fragments/fragment :: nav"></nav>
 
 
-<div class="add-task-container">
-    <input type="text" maxlength="12" id="taskText" placeholder="New Task..." onkeydown="if (event.keyCode == 13)
-                        document.getElementById('add').click()">
-    <button id="add" class="button add-button" onclick="addTask()">Add New Task</button>
-</div>
+<!--<div class="add-task-container">-->
+<!--    <input type="text" maxlength="12" id="taskText" placeholder="New Task..." onkeydown="if (event.keyCode == 13)-->
+<!--                        document.getElementById('add').click()">-->
+<!--    <button id="add" class="button add-button" onclick="addTask()">Add New Task</button>-->
+<!--</div>-->
 
-<div class="main-container">
-    <ul class="columns">
-
-        <li class="column to-do-column">
+<div class="main-holder">
+    <ul class="main-ul">
+        <li class="main-li">
             <div class="column-header">
                 <h4>To Do</h4>
             </div>
+
             <ul class="task-list" id="to-do">
                 <li class="task">
                     <p>Analysis</p>
@@ -47,124 +47,60 @@
                     <p>Measure</p>
                 </li>
             </ul>
-        </li>
+            <!--            /*************/-->
 
-        <li class="column doing-column">
-            <div class="column-header">
-                <h4>Doing</h4>
+            <!--            <div th:each="obj : ${board}">-->
+            <!--                <h3>board </h3>-->
+            <!--                <h3 th:text="${obj.boardName}"></h3>-->
+            <!--                <p th:text="${obj.description}"></p>-->
+
+            <h3>Section form</h3>
+            <form th:action="@{/newSection/{id}(id=${boardList.id})}" method="post">
+                <input type="text" name="title"/>
+                <input type="submit" value="submit">
+            </form>
+            <!--            /***********/-->
+            <!--            <div th:each="board : ${boardList}">-->
+            <!--                <ul>-->
+            <!--                    <div th:each="section : ${board.sections}">-->
+            <!--                        <li th:text="${section.title}"></li>-->
+            <!--                    </div>-->
+            <!--                </ul>-->
+            <!--            </div>-->
+            <div th:each="sec1 : ${sec2}">
+                <h2 th:text="${sec1.title}"></h2>
+                <form th:action="@{/newTask/{id}(id=${sec1.id})}" method="post">-->
+                    <input type="text" name="taskName"/>
+                    <input type="text" name="description"/>
+                    <input type="submit" value="submit">
+                </form>
+                <div th:each=" task : ${sec1.getTaskList()}">
+                    <h4 th:text="${task.taskName}"></h4>
+                    <p> description : <span th:text="${task.description}"></span></p>
+                </div>
             </div>
-            <ul class="task-list" id="doing">
-                <li class="task">
-                    <p>Hypothesis</p>
-                </li>
-                <li class="task">
-                    <p>User Testing</p>
-                </li>
-                <li class="task">
-                    <p>Prototype</p>
-                </li>
-            </ul>
-        </li>
+            <!--            <div th:each="section : ${sections} ">-->
+            <!--                <p th:text="${section.title}"></p>-->
+            <!--                <h3>Task form</h3>-->
+            <!--
+            <!--                <div th:each="task : ${section.getTaskList()}">-->
+            <!--                    <h3 th:text="${task.taskName}"></h3>-->
+            <!--                    <h3 th:text="${task.description}"></h3>-->
+            <!--                </div>-->
+            <!--            </div>-->
+            <!--            </div>-->
 
-        <li class="column done-column">
-            <div class="column-header">
-                <h4>Done</h4>
-            </div>
-            <ul class="task-list" id="done">
-                <li class="task">
-                    <p>Ideation</p>
-                    <div class="column-icons">
-                        <span class="add-icon"><i class="far fa-minus-square"></i> </span>
-                    </div>
-                </li>
-                <li class="task">
-                    <p>Sketches</p>
-                    <div class="column-icons">
-                        <span class="add-icon"><i class="far fa-minus-square"></i> </span>
-                    </div>
-                </li>
-            </ul>
-        </li>
 
+        </li>
     </ul>
 </div>
 <hr/>
 
 
-<footer>
+<!--<footer>-->
 
-</footer>
+<!--</footer>-->
 <script th:src="@{/app.js}"></script>
 </body>
 </html>
 
-
-<!--<div class="main-container">-->
-<!--    <ul class="columns ">-->
-<!--        <li class="column to-do-column">-->
-<!--            <div class="column-header">-->
-<!--                <h4>To Do-->
-<!--                </h4>-->
-
-<!--            </div>-->
-<!--            <ul class="task-list" id="to-do">-->
-<!--                <li class="task todo-row">-->
-<!--                    <p>Analysis </p>-->
-<!--                </li>-->
-<!--                <li class="task todo-row">-->
-<!--                    <p>Coding</p>-->
-<!--                </li>-->
-<!--                <li class="task todo-row">-->
-<!--                    <p>Card Sorting</p>-->
-<!--                </li>-->
-<!--                <li class="task todo-row">-->
-<!--                    <p>Measure</p>-->
-<!--                </li>-->
-<!--&lt;!&ndash;                <div class="column-icons">&ndash;&gt;-->
-<!--&lt;!&ndash;                    <span class="add-icon"><i class="far fa-plus-square"></i> </span>&ndash;&gt;-->
-<!--&lt;!&ndash;                </div>&ndash;&gt;-->
-<!--            </ul>-->
-<!--        </li>-->
-
-<!--        <li class="column doing-column">-->
-<!--            <div class="column-header">-->
-<!--                <h4>Doing</h4>-->
-<!--            </div>-->
-<!--            <ul class="task-list" id="doing">-->
-<!--                <li class="task todo-row">-->
-<!--                    <p>Hypothesis</p>-->
-<!--                </li>-->
-<!--                <li class="task todo-row">-->
-<!--                    <p>User Testing</p>-->
-<!--                </li>-->
-<!--                <li class="task todo-row">-->
-<!--                    <p>Prototype</p>-->
-<!--                </li>-->
-<!--            </ul>-->
-<!--        </li>-->
-
-<!--        <li class="column done-column">-->
-<!--            <div class="column-header">-->
-<!--                <h4>Done</h4>-->
-<!--            </div>-->
-<!--            <ul class="task-list" id="done">-->
-<!--                <li class="task todo-row">-->
-<!--                    <p>Ideation</p>-->
-<!--                    <div class="column-icons">-->
-<!--                        <span class="add-icon"><i class="far fa-minus-square"></i></span>-->
-<!--                    </div>-->
-<!--                </li>-->
-<!--                <li class="task todo-row">-->
-<!--                    <p>Sketches</p>-->
-<!--                    <div class="column-icons">-->
-<!--                        <span class="add-icon"><i class="far fa-minus-square"></i> </span>-->
-<!--                    </div>-->
-<!--                </li>-->
-<!--            </ul>-->
-<!--        </li>-->
-<!--    </ul>-->
-<!--</div>-->
-<!--<script src="https://kit.fontawesome.com/91631dcc93.js" crossorigin="anonymous"></script>-->
-<!--<script src="app.js"></script>-->
-<!--</body>-->
-<!--</html>-->
