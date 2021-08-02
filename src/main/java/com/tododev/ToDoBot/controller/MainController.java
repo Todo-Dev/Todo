@@ -8,13 +8,14 @@ import java.security.Principal;
 @Controller
 public class MainController {
 
-
+    @GetMapping("/profile")
+    public String getProfilePage() {
+        return "profile";
+    }
     @GetMapping("/loading")
     public String getLoadingPage() {
         return "loading";
     }
-
-
     @GetMapping("/board")
     public String getBoardPage() {
         return "board";
