@@ -24,6 +24,11 @@ public class ExplorerController {
 
     @GetMapping("/explorer")
     public String explorerPage(Principal principal,Model model){
+        if (principal==null){
+            model.addAttribute("user", null);
+        }else {
+            model.addAttribute("user", "data");
+        }
         List<ApplicationUser> users= applicationUserRepository.findAll();
         ApplicationUser currentUser = applicationUserRepository.findApplicationUserByUsername(principal.getName());
         users.removeAll(currentUser.getFriends());
@@ -35,6 +40,11 @@ public class ExplorerController {
 
     @GetMapping("/findUser")
     public String findUser(@RequestParam String username, Model model,Principal principal){
+        if (principal==null){
+            model.addAttribute("user", null);
+        }else {
+            model.addAttribute("user", "data");
+        }
         List<ApplicationUser> users= applicationUserRepository.findAll();
         ApplicationUser currentUser = applicationUserRepository.findApplicationUserByUsername(principal.getName());
         users.removeAll(currentUser.getFriends());

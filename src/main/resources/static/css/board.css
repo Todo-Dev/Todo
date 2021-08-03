@@ -1,33 +1,90 @@
-@import url("https://fonts.googleapis.com/css?family=Arimo:400,700|Roboto+Slab:400,700");
+.sectionUl, .sectionUl li{
+        list-style:none;
+    }
+     .sectionUl{
+        overflow:hidden;
+        padding:3em;
+    }
+     .sectionUl li a{
+        text-decoration:none;
+        color:#000;
+        background:#f6ff7a;
+        display:block;
+        height:15em;
+        width:15em;
+        padding:1em;
+        -moz-box-shadow:5px 5px 7px rgba(33,33,33,1);
+      Safari+Chrome
+        -webkit-box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+      Opera
+        box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+        -moz-transition:-moz-transform .15s linear;
+        -o-transition:-o-transform .15s linear;
+        -webkit-transition:-webkit-transform .15s linear;*/
+    }
+     .sectionUl li{
+        margin:1em;
+        float:left;
+    }
+     .sectionUl li h2{
+        font-size:140%;
+        font-weight:bold;
+        padding-bottom:10px;
+    }
+     .sectionUl li p{
+        font-family:"Reenie Beanie",arial,sans-serif;
+        font-size:180%;
+    }
+     .sectionUl li:nth-child(even) a{
+        -o-transform:rotate(4deg);
+        -webkit-transform:rotate(4deg);
+        -moz-transform:rotate(4deg);
+        position:relative;
+        top:5px;
+    }
+     .sectionUl li:nth-child(3n) a{
+        -o-transform:rotate(-3deg);
+        -webkit-transform:rotate(-3deg);
+        -moz-transform:rotate(-3deg);
+        position:relative;
+        top:-5px;
+        background:#f26b6b;
+    }
+     .sectionUl li:nth-child(5n) a{
+        -o-transform:rotate(5deg);
+        -webkit-transform:rotate(5deg);
+        -moz-transform:rotate(5deg);
+        position:relative;
+        top:-10px;
+        background: #6bbcf2;
+    }
+     .sectionUl li a:hover,ul li a:focus{
+        -moz-box-shadow:10px 10px 7px rgba(0,0,0,.7);
+        -webkit-box-shadow: 10px 10px 7px rgba(0,0,0,.7);
+        box-shadow:10px 10px 7px rgba(0,0,0,.7);
+        -webkit-transform: scale(1.25);
+        -moz-transform: scale(1.25);
+        -o-transform: scale(1.25);
+        position:relative;
+        z-index:5;
+    }
 
-* {
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
-      'Lucida Sans', Arial, sans-serif;
+/* Basic Style */
+/*
+body {
+	background: #fff;
+	color: #333;
+	font-family: Lato, sans-serif;
+	background-color:#e4e4e4;
 }
 
-body {
-  min-width: 420px;
-     background-image: url('/img/background.jpg');
-        background-position: center;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-  /*
-  background-image:url("https://images-ext-2.discordapp.net/external/MEY8_Nzj9HBkZF4fS7k4AnOv2a4OD0g3h80vzBWGiGo/https/clevlog.com/wp-content/uploads/2019/12/lauren-sauder-6GPBVYLapYQ-unsplash-1280x720.jpg?width=853&height=480");
-  background-repeat: no-repeat;
-  background-size:cover;
-  */
-  /*
-  background: linear-gradient(
-      90deg,
-      #2d3436 0%,
-      #d3d3d3 100%
-    );
-    */
+.container {
+	display: block;
+	width: 400px;
+	margin: 10px auto 100px;
+	background-color:#fff;
+	padding:0px 10px 10px 10px;
+	border-radius:10px
 }
 
 
@@ -37,56 +94,142 @@ body {
   display: flex;
 }
 
-.main-ul {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: start;
-  -ms-flex-align: start;
-  align-items: flex-start;
-  margin: 2rem auto;
-}
-
-.main-li {
-  width: 13rem;
-  margin: 0 1.4rem;
-  background: #a8a8a8;
-  border: #6c757d 0.2rem solid;
-  border-radius: 0.2rem;
-}
-/*
-.column-header {
-  padding: 0.1rem;
-  border-bottom: #6c757d 0.2rem solid;
-}
-
-.column-header h4 {
-  text-align: center;
-}
-
-.to-do-column .column-header {
-  background:  #0dccf2;
-}
-
-.doing-column .column-header {
-  background: #0bb8da;
-}
-
-.done-column .column-header {
-  background: #098faa;
-}
-
-.task-list {
-  min-height: 3rem;
-}
-
 ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
+li * {
+	float: left;
+}
+
+li,
+h3 {
+	clear: both;
+	list-style: none;
+}
+
+input,
+button {
+	outline: none;
+}
+
+button {
+	background: none;
+	border: 0px;
+	color: #888;
+	font-size: 15px;
+	width: 60px;
+	margin: 10px 0 0;
+	font-family: Lato, sans-serif;
+	cursor: pointer;
+}
+
+button:hover {
+	color: #333;
+}
+
+
+/* Heading */
+/*
+h3,
+label[for='new-task'] {
+	color: #333;
+	font-weight: 700;
+	font-size: 15px;
+	border-bottom: 2px solid #333;
+	padding: 20px 0 10px;
+	margin: 0;
+	text-transform: uppercase;
+}
+
+input[type="text"] {
+	margin: 0;
+	font-size: 18px;
+	line-height: 18px;
+	height: 18px;
+	padding: 10px;
+	border: 1px solid #ddd;
+	background: #fff;
+	border-radius: 6px;
+	font-family: Lato, sans-serif;
+	color: #888;
+}
+
+input[type="text"]:focus {
+	color: #333;
+}
+
+
+/* New Task */
+/*
+label[for='new-task'] {
+	display: block;
+	margin: 0 0 20px;
+}
+
+input#new-task {
+	float: left;
+	width: 318px;
+}
+
+p > button:hover {
+	color: #0FC57C;
+}
+
+
+/* Task list */
+/*
 li {
+	overflow: hidden;
+	padding: 20px 0;
+	border-bottom: 1px solid #eee;
+}
+
+li > input[type="checkbox"] {
+	margin: 0 10px;
+	position: relative;
+	top: 15px;
+}
+
+li > label {
+	font-size: 18px;
+	line-height: 40px;
+	width: 237px;
+	padding: 0 0 0 11px;
+}
+
+li > input[type="text"] {
+	width: 226px;
+}
+
+li > .delete:hover {
+	color: #CF2323;
+}
+
+
+/* Completed */
+/*
+#completed-tasks label {
+	text-decoration: line-through;
+	color: #888;
+}
+
+
+/* Edit Task */
+/*
+ul li input[type=text] {
+	display: none;
+}
+
+ul li.editMode input[type=text] {
+	display: block;
+}
+
+ul li.editMode label {
+	display: none;
+}
+
   list-style-type: none;
 }
 
@@ -194,3 +337,10 @@ color:white;
   background-color: #ffdd6e;
 }
 */
+.div1{
+background-color:red;
+width:50%;
+    margin: 10px;
+
+}
+

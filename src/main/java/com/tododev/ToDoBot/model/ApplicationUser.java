@@ -26,12 +26,12 @@ public class ApplicationUser implements UserDetails {
 
     @NotEmpty()
     @Size(max = 10)
-    @Column(nullable = false, length = 10)
+    @Column(nullable = true, length = 10)
     private String firstName;
 
     @NotEmpty()
     @Size(max = 10)
-    @Column(nullable = false, length = 10)
+    @Column(nullable = true, length = 10)
     private String lastName;
 
     @NotEmpty()
