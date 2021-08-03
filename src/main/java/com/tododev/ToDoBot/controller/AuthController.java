@@ -51,7 +51,7 @@ public class AuthController {
             , @RequestParam String profession) throws ParseException {
         SimpleDateFormat formatter2 = new SimpleDateFormat("yyyy-MM-dd");
         Date date=formatter2.parse(dateofbirth);
-        ApplicationUser newUser = new ApplicationUser(username , encoder.encode(password) , firstname , lastname , email , date , profession);
+        ApplicationUser newUser = new ApplicationUser(username , encoder.encode(password) , firstname , lastname , email , date , profession , "Add your bio Here");
         applicationUserRepository.save(newUser);
         Authentication auth = new UsernamePasswordAuthenticationToken(newUser , null , new ArrayList<>());
         SecurityContextHolder.getContext().setAuthentication(auth);

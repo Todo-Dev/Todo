@@ -30,26 +30,26 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form th:action="@{/updateprofile}" th:method="POST">
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">First Name</label>
-                        <input type="text" name="firstname" th:placeholder="${user.getFirstName()}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input type="text" name="firstname" th:value="${user.getFirstName()}" th:placeholder="${user.getFirstName()}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Last Name</label>
-                        <input type="text" class="form-control" name="lastname" id="exampleInputPassword1" th:placeholder="${user.getLastName()}">
+                        <input type="text" class="form-control" name="lastname" th:value="${user.getLastName()}" id="exampleInputPassword1" th:placeholder="${user.getLastName()}">
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" name="email" id="email" th:placeholder="${user.getEmail()}">
+                        <input type="email" class="form-control" name="email" id="email" th:value="${user.getEmail()}" th:placeholder="${user.getEmail()}">
                     </div>
                     <div class="mb-3">
                         <label for="dateofbirth" class="form-label">Date of Birth</label>
-                        <input type="date" class="form-control" name="dateofbirth" id="dateofbirth" th:placeholder="${user.getDateOfBirth()}">
+                        <input type="date" class="form-control" th:value="${user.getDateOfBirth()}" name="dateofbirth"  id="dateofbirth" th:placeholder="${user.getDateOfBirth()}">
                     </div>
                     <div class="mb-3">
                         <label for="profession" class="form-label">Profession</label>
-                        <input type="text" class="form-control" name="profession" id="profession" th:placeholder="${user.getProfession()}">
+                        <input type="text" class="form-control" name="profession" id="profession" th:value="${user.getProfession().toString().substring(0,10)}" th:placeholder="${user.getProfession()}">
                     </div>
                     <button type="submit" class="btn btn-primary">Save</button>
                 </form>
@@ -74,7 +74,8 @@
                     <i class="fa fa-twitter p-2"></i>
                     <i class="fa fa-pinterest p-2"></i>
                 </p>
-                <p>An artist of considerable range, Chet Faker — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music, giving it a warm, intimate feel with a solid groove structure.</p>
+                <p class="bio" th:text="${user.getBio()}"></p>
+                <p class="bio-edit"><i class="fas fa-edit"></i></p>
             </div>
             <div class="all-tabs">
                 <div class="row">
