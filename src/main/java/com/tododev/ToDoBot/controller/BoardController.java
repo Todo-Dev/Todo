@@ -17,6 +17,11 @@ public class BoardController {
      */
     @GetMapping("/myboards")
     public String getBoardsPage(Principal principal, Model model) {
+        if (principal==null){
+            model.addAttribute("user", null);
+        }else {
+            model.addAttribute("user", "data");
+        }
         model.addAttribute("board",applicationUserRepository.findApplicationUserByUsername(principal.getName()).getBoardLists());
         return "myboards";
     }
