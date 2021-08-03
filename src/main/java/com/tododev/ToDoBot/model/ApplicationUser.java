@@ -2,6 +2,8 @@ package com.tododev.ToDoBot.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import java.sql.Date;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -13,7 +15,8 @@ public class ApplicationUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Size( max = 250)
+    private String bio ;
     @NotEmpty()
     @Size(max = 25)
     @Column(unique = true, nullable = false)
@@ -25,14 +28,22 @@ public class ApplicationUser implements UserDetails {
     private String password;
 
     @NotEmpty()
-    @Size(max = 10)
+    @Size(max = 20)
     @Column(nullable = true, length = 10)
     private String firstName;
 
     @NotEmpty()
-    @Size(max = 10)
+    @Size(max = 20)
     @Column(nullable = true, length = 10)
     private String lastName;
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
 
     @NotEmpty()
     @Size(max = 25)
@@ -59,7 +70,7 @@ public class ApplicationUser implements UserDetails {
     @OneToMany(mappedBy = "applicationUser")
     List<BoardList> boardLists;
 
-    public ApplicationUser(String username, String password, String firstName, String lastName, String email, Date dateOfBirth, String profession) {
+    public ApplicationUser(String username, String password, String firstName, String lastName, String email, Date dateOfBirth, String profession , String bio) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -67,10 +78,10 @@ public class ApplicationUser implements UserDetails {
         this.email = email;
         this.dateOfBirth = dateOfBirth;
         this.profession = profession;
+        this.bio = bio;
     }
 
     public ApplicationUser() {
-
     }
 
     public List<BoardList> getBoardLists() {
@@ -104,6 +115,26 @@ public class ApplicationUser implements UserDetails {
 
     public String getProfession() {
         return profession;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public void setProfession(String profession) {
+        this.profession = profession;
     }
 
     @Override

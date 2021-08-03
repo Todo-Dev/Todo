@@ -12,9 +12,4 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface TaskRepository extends JpaRepository<Task,Long> {
 
-    @Modifying
-    @Transactional
-    @Query("UPDATE Task t SET t.section = :next_section WHERE t.id = :task_id")
-    void updateOnMove(@Param("task_id") Long task_id, @Param("next_section") Section new_column);
-
 }
