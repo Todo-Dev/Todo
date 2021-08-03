@@ -1,9 +1,6 @@
 package com.tododev.ToDoBot.controller;
 
-import com.tododev.ToDoBot.model.ApplicationUser;
-import com.tododev.ToDoBot.model.BoardList;
-import com.tododev.ToDoBot.model.Section;
-import com.tododev.ToDoBot.model.Task;
+import com.tododev.ToDoBot.model.*;
 import com.tododev.ToDoBot.repository.ApplicationUserRepository;
 import com.tododev.ToDoBot.repository.BoardListRepository;
 import com.tododev.ToDoBot.repository.SectionRepository;
@@ -11,10 +8,7 @@ import com.tododev.ToDoBot.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
@@ -72,4 +66,12 @@ public class TestController {
         long boardId = section.getBoardList().getId();
         return new RedirectView("/board/" + boardId);
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/newTask/{id}/moveTask", method = RequestMethod.POST)
+    public void moveTask(@PathVariable Long id, @RequestBody MovedTask data) {
+        Section section = sectionRepository.getById(id);
+        taskRepository.updateOnMove(data.getTaskId(), section);
+    }
+//html post for move task
 }

@@ -2,6 +2,8 @@ package com.tododev.ToDoBot.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -13,12 +15,30 @@ public class ApplicationUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique = true)
+
+    @NotEmpty()
+    @Size(max = 25)
+    @Column(unique = true, nullable = false)
     private String username;
+
+    @NotEmpty()
+    @Size(min = 8)
+    @Column(nullable = false)
     private String password;
+
+    @NotEmpty()
+    @Size(max = 10)
+    @Column(nullable = false, length = 10)
     private String firstName;
+
+    @NotEmpty()
+    @Size(max = 10)
+    @Column(nullable = false, length = 10)
     private String lastName;
-    @Column(unique = true)
+
+    @NotEmpty()
+    @Size(max = 25)
+    @Column(unique = true, nullable = true)
     private String email;
     private Date dateOfBirth;
     private String profession;
