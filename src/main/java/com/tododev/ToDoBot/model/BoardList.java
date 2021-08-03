@@ -10,6 +10,7 @@ public class BoardList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(nullable = false)
     private String boardName;
     private String description;
 
