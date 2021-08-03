@@ -44,7 +44,12 @@ public class TestController {
     }
 
     @GetMapping("/board/{id}")
-    public String getMyBoard(@PathVariable long id, Model model) {
+    public String getMyBoard(@PathVariable long id, Model model,Principal principal) {
+        if (principal==null){
+            model.addAttribute("user", null);
+        }else {
+            model.addAttribute("user", "data");
+        }
         BoardList boardList = boardListRepository.findById(id).get();
         model.addAttribute("boardList", boardList);
         model.addAttribute("sec2",boardList.getSections());

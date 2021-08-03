@@ -19,7 +19,12 @@ public class MainController {
         return "index";
     }
     @GetMapping("/profile")
-    public String getProfilePage() {
+    public String getProfilePage(Principal principal,Model model) {
+        if (principal==null){
+            model.addAttribute("user", null);
+        }else {
+            model.addAttribute("user", "data");
+        }
         return "profile";
     }
     @GetMapping("/loading")
@@ -27,7 +32,12 @@ public class MainController {
         return "loading";
     }
     @GetMapping("/board")
-    public String getBoardPage() {
+    public String getBoardPage(Principal principal ,Model model) {
+        if (principal==null){
+            model.addAttribute("user", null);
+        }else {
+            model.addAttribute("user", "data");
+        }
         return "board";
     }
 }
