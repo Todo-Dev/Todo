@@ -87,8 +87,8 @@ body {
 	border-radius:10px
 }
 
-/**
-.main-container {
+
+.main-holder {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
