@@ -10,6 +10,7 @@ public class Section {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  long id;
 
+    @Column(nullable = false)
     private String title;
 
     @ManyToOne
