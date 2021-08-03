@@ -2,7 +2,7 @@ package com.tododev.ToDoBot.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
+import java.sql.Date;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -28,12 +28,12 @@ public class ApplicationUser implements UserDetails {
     private String password;
 
     @NotEmpty()
-    @Size(max = 10)
+    @Size(max = 20)
     @Column(nullable = true, length = 10)
     private String firstName;
 
     @NotEmpty()
-    @Size(max = 10)
+    @Size(max = 20)
     @Column(nullable = true, length = 10)
     private String lastName;
 
