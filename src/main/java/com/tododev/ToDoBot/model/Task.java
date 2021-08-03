@@ -1,6 +1,7 @@
 package com.tododev.ToDoBot.model;
 
 import javax.persistence.*;
+import java.util.Optional;
 
 @Entity
 public class Task {

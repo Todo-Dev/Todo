@@ -31,31 +31,61 @@
     <input type="submit" value="Add Section"/>
 </form>
 
-<div th:each="sec1 : ${sec2}">
-    <div class="div1"  >
-        <ul th:text="${sec1.id}">
-       <li id : th:text="${sec1.id}"  > </li>
-       <li title : th:text="${sec1.title}"  > </li>
-        </ul>
+
+<div class="card border-primary mb-3" style="max-width: 18rem;">
+    <div class="card-header">Header</div>
+    <div class="card-body text-primary">
+        <h5 class="card-title">Primary card title</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    </div>
+
+
+
+
+<div class="card border-primary mb-3" th:each="sec1 : ${sec2}" style="max-width: 18rem;">
+<!--    <div class="card border-primary mb-3"  >-->
+        <div  class="card-header"   th:text="${sec1.title}">
 
         <form method="get" th:action="@{/deleteSection/{id}(id=${boardList.id})}">
             <input type="hidden" th:value="${sec1.id}" name="secId">
             <input type="submit" value="Delete">
         </form>
+        </div>
+
+    <div class="card-body text-primary" >
            <form th:action="@{/newTask/{id}(id=${sec1.id})}" method="post">
             <input type="text" name="taskName"/>
                <input type="text" name="description"/>
                <input type="submit" value="Add Task"/>
+
             </form>
-       <ul th:each=" task : ${sec1.getTaskList()}">
+       <div  th:each=" task : ${sec1.getTaskList()}" >
 
-           <p> taskName : <span th:text="${task.taskName}"></span></p>
-           <p> description : <span th:text="${task.description}"></span></p>
+           <h5 class="card-title"> taskName : <span th:text="${task.taskName}"></span></h5>
+           <p class="card-text"> description : <span th:text="${task.description}"></span></p>
+           <form method="get" th:action="@{/deleteTask/{id}(id=${boardList.id})}">
+               <input type="hidden" th:value="${task.id}" name="taskId">
+               <input type="submit" value="Delete">
+           </form>
 
 
-        </ul>
+           <form method="get" th:action="@{/moveNext/{id}(id=${boardList.id})}" th:unless="${lastSec==sec1}" >
+               <input type="hidden" th:value="${sec1.id}" name="sectionId">
+               <input type="hidden" th:value="${task.id}" name="taskId">
+               <input type="submit" value="Move Next">
+           </form>
+           <form method="get" th:action="@{/moveBack/{id}(id=${boardList.id})}" th:unless="${firstSec==sec1}" >
+               <input type="hidden" th:value="${sec1.id}" name="sectionId">
+               <input type="hidden" th:value="${task.id}" name="taskId">
+               <input type="submit" value="Move Back">
+           </form>
 
-    </div>
+
+
+
+        </div>
+
+     </div>
     </div>
 </div>
 
