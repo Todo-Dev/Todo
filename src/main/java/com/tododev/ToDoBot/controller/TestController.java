@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -53,13 +54,26 @@ public class TestController {
         BoardList boardList = boardListRepository.findById(id).get();
         model.addAttribute("boardList", boardList);
         model.addAttribute("sec2",boardList.getSections());
+
+//
+//        List<Section> lists=new ArrayList<>();
+//        Section todo=new Section("TO-DO",boardList);
+//        Section inProgress=new Section("IN-progress",boardList);
+//        Section done=new Section("DONE",boardList);
+//        lists.add(todo);
+//        lists.add(inProgress);
+//        lists.add(done);
+//
+//        model.addAttribute("sectionLists",lists);
+
         return "board";
     }
 
     @PostMapping("/newSection/{id}")
-    public RedirectView newSection(@PathVariable Long id, @RequestParam String title,Model model) {
+    public RedirectView newSection(@PathVariable Long id, @RequestParam String title,Model model,Long secId) {
         BoardList boardList = boardListRepository.getById(id);
         sectionRepository.save(new Section(title, boardList));
+
         return new RedirectView("/board/" + id);
     }
 
@@ -67,16 +81,32 @@ public class TestController {
     @PostMapping("/newTask/{id}")
     public RedirectView newTask(@RequestParam String taskName, String description, @PathVariable Long id) {
         Section section = sectionRepository.getById(id);
+
         taskRepository.save(new Task(taskName, description, section));
+
         long boardId = section.getBoardList().getId();
         return new RedirectView("/board/" + boardId);
     }
+    @GetMapping("/deleteBoard/{id}")
+    public RedirectView deleteBoard(Long boardId,@PathVariable Long id) {
+        BoardList thisBoard= boardListRepository.getById(boardId);
+        List<Section> SectionInThisBoard = thisBoard.getSections();
 
-    @ResponseBody
-    @RequestMapping(value = "/newTask/{id}/moveTask", method = RequestMethod.POST)
-    public void moveTask(@PathVariable Long id, @RequestBody MovedTask data) {
-        Section section = sectionRepository.getById(id);
-        taskRepository.updateOnMove(data.getTaskId(), section);
+        boardListRepository.deleteById(boardId);
+        return new RedirectView("/myboards");
     }
-//html post for move task
+
+
+    @GetMapping("/deleteSection/{id}")
+    public RedirectView deleteSection(Long secId,@PathVariable Long id) {
+        Section thisSection= sectionRepository.getById(secId);
+        List<Task> tasksInThisSection = thisSection.getTaskList();
+
+        sectionRepository.deleteById(secId);
+        return new RedirectView("/board/" + id);
+    }
+
+
+
+
 }
