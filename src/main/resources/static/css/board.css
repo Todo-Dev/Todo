@@ -30,14 +30,14 @@ body {
     */
 }
 
-/**
-.main-container {
+
+.main-holder {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-.columns {
+.main-ul {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -47,14 +47,14 @@ body {
   margin: 2rem auto;
 }
 
-.column {
+.main-li {
   width: 13rem;
   margin: 0 1.4rem;
   background: #a8a8a8;
   border: #6c757d 0.2rem solid;
   border-radius: 0.2rem;
 }
-
+/*
 .column-header {
   padding: 0.1rem;
   border-bottom: #6c757d 0.2rem solid;
