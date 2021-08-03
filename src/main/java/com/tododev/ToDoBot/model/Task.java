@@ -11,7 +11,6 @@ public class Task {
     private String taskName;
     private String description;
 
-
     @ManyToOne
     Section section;
 
@@ -35,10 +34,6 @@ public class Task {
 
     public Section getSection() {
         return section;
-    }
-
-    public void setSection(Section section) {
-        this.section = section;
     }
 
     public void setTaskName(String taskName) {

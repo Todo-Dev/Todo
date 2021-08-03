@@ -25,7 +25,6 @@
                 <button type="button" class="card-text" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
                     <a class="create-board">+</a>
                 </button>
-
             </div>
         </div>
     </div>
@@ -37,11 +36,7 @@
                     <h5 class="card-title" th:text="${obj.boardName}"></h5>
                     <p class="card-text card-content" th:text="${obj.description}"></p>
                     <a type="button" class="btn btn-info  me-2 adds" th:href="@{/board/{id}(id=${obj.id})}" >View</a>
-<!--                    <a type="button" class="btn btn-info  me-2 adds" href="">Delete</a>-->
-                    <form method="get" th:action="@{/deleteBoard/{id}(id=${obj.id})}">
-                        <input type="hidden" th:value="${obj.id}" name="boardId">
-                        <input  type="submit" value="Delete" class="btn btn-info"  onclick="return confirm('Are you sure?')">
-                    </form>
+                    <a type="button" class="btn btn-secondary  me-2 adds" href="">Delete</a>
                 </div>
             </div>
         </div>

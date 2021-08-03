@@ -18,7 +18,7 @@ public class BoardList {
     @ManyToOne
     ApplicationUser applicationUser;
 
-    @OneToMany(mappedBy = "boardList",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "boardList")
     List<Section> sections;
 
 

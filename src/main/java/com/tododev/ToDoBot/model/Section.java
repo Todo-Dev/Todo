@@ -16,7 +16,7 @@ public class Section {
     @ManyToOne
     BoardList boardList;
 
-    @OneToMany(mappedBy = "section" ,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "section")
     List<Task> taskList;
 
 
@@ -44,5 +44,4 @@ public class Section {
     public BoardList getBoardList() {
         return boardList;
     }
-
 }
