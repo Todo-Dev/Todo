@@ -29,7 +29,7 @@ public class MainController {
             model.addAttribute("user", null);
         }else {
             ApplicationUser loggedUser = applicationUserRepository.findApplicationUserByUsername(principal.getName());
-            String dob = loggedUser.getDateOfBirth().toString().substring(0,10);
+            String dob = loggedUser.getDateOfBirth().toString();
             model.addAttribute("user", loggedUser);
             model.addAttribute("date" , dob);
         }

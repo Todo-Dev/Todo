@@ -11,7 +11,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
 
 @Controller
 public class ProfileController {
@@ -22,18 +22,12 @@ public class ProfileController {
     public RedirectView updateProfile(
              @RequestParam String firstname, @RequestParam String lastname
             , @RequestParam String email
-            , @RequestParam String dateofbirth
+            , @RequestParam Date dateofbirth
             , @RequestParam String profession , Principal principal
     ) throws ParseException {
         ApplicationUser loggedUser = applicationUserRepository.findApplicationUserByUsername(principal.getName());
-        if (dateofbirth.equals("")) {
-            loggedUser.setDateOfBirth(loggedUser.getDateOfBirth());
-        }
-        else {
-            SimpleDateFormat formatter2 = new SimpleDateFormat("yyyy-MM-dd");
-            Date date=formatter2.parse(dateofbirth);
-            loggedUser.setDateOfBirth(date);
-        }
+
+            loggedUser.setDateOfBirth(dateofbirth);
         loggedUser.setFirstName(firstname);
         loggedUser.setLastName(lastname);
         loggedUser.setEmail(email);
