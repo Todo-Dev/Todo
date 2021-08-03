@@ -1,7 +1,6 @@
 .gap{
     display: flex;
     gap: 1.5rem;
-    justify-content: flex-start;
 }
 
 .bg{
@@ -9,13 +8,13 @@
 }
 
 .space-edge{
-    margin: 3rem;
+    margin: 2rem;
 }
 
 .card-container{
     width: 25%;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin: 20px 0px 20px 0px;
+    display: contents;
 }
 
 .create-board{
@@ -24,6 +23,8 @@
        justify-content: center;
        text-decoration: none;
        color: #0dcaf0;
+       margin-top: 20px;
+
 }
 
 .card-body{
