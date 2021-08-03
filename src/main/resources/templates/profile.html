@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
 
 <head>
     <meta charset="UTF-8">
@@ -17,56 +18,48 @@
 
 <body>
 <!-- start upper bar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top pt-3 pb-3">
-    <div class="container">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
-                aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <a class="navbar-brand me-4" href="#">Navbar</a>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">
-                        My Account
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="/myboards"><i class="fas fa-check"></i>My Boards</a></li>
-                        <li><a class="dropdown-item" href="/addboard"><i class="fas fa-plus"></i> Add Board</a></li>
-                        <li><a class="dropdown-item" href="/friends"><i class="fas fa-star"></i> Friends</a></li>
+<nav th:replace="fragments/navfrag :: nav"></nav>
 
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/explorer">Explore</a>
-                </li>
-
-            </ul>
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item m-auto">
-                    <a type="button" class="btn btn-info  me-2" href="/login">Login </a>
-                </li>
-                <li class="nav-item m-auto">
-                    <a type="button" class="btn btn-secondary  me-2" href="/signup">signUp</a>
-                </li>
-                <li class="nav-item avatar-img dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false"><img src="./img/avatar.png" alt="">
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="/profile"><i class="far fa-user"></i>My profile</a></li>
-                        <li><a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt"></i> logout</a></li>
-                    </ul>
-                </li>
-            </ul>
+<!-- end upper bar -->
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Edit data</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{/updateprofile}" th:method="POST">
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">First Name</label>
+                        <input type="text" name="firstname" th:value="${user.getFirstName()}" th:placeholder="${user.getFirstName()}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" name="lastname" th:value="${user.getLastName()}" id="exampleInputPassword1" th:placeholder="${user.getLastName()}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" name="email" id="email" th:value="${user.getEmail()}" th:placeholder="${user.getEmail()}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="dateofbirth" class="form-label">Date of Birth</label>
+                        <input type="date" class="form-control" th:value="${user.getDateOfBirth()}" name="dateofbirth"  id="dateofbirth" th:placeholder="${user.getDateOfBirth()}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="profession" class="form-label">Profession</label>
+                        <input type="text" class="form-control" name="profession" id="profession" th:value="${user.getProfession().toString().substring(0,10)}" th:placeholder="${user.getProfession()}">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Save</button>
+            </div>
         </div>
     </div>
-</nav>
-<!-- end upper bar -->
+</div>
 <main>
     <div class="background-section">
     </div>
@@ -74,14 +67,15 @@
         <div class="container">
             <div class="profil-info">
                 <img class="rounded-circle" src="https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_auto:good%2Cw_300/MTU0NjQzOTk4OTQ4OTkyMzQy/ansel-elgort-poses-for-a-portrait-during-the-baby-driver-premiere-2017-sxsw-conference-and-festivals-on-march-11-2017-in-austin-texas-photo-by-matt-winkelmeyer_getty-imagesfor-sxsw-square.jpg" alt="">
-                <h2 class="mt-4">Christian Louboutin</h2>
-                <p>DESIGNER</p>
+                <h2 class="mt-4" th:text="${user.getFirstName()} + ' ' + ${user.getLastName}"></h2>
+                <p th:text="${user.getProfession()}"></p>
                 <p>
                     <i class="fa fa-dribbble p-2"></i>
                     <i class="fa fa-twitter p-2"></i>
                     <i class="fa fa-pinterest p-2"></i>
                 </p>
-                <p>An artist of considerable range, Chet Faker — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music, giving it a warm, intimate feel with a solid groove structure.</p>
+                <p class="bio" th:text="${user.getBio()}"></p>
+                <p class="bio-edit"><i class="fas fa-edit"></i></p>
             </div>
             <div class="all-tabs">
                 <div class="row">
@@ -121,7 +115,7 @@
                                             <label>Name</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <p>Kshiti Ghelani</p>
+                                            <p th:text="${user.getFirstName()}+' '+ ${user.getLastName()}"></p>
                                         </div>
                                     </div>
                                     <div class="row bb">
@@ -129,15 +123,7 @@
                                             <label>Email</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <p>kshitighelani@gmail.com</p>
-                                        </div>
-                                    </div>
-                                    <div class="row bb">
-                                        <div class="col-md-6">
-                                            <label>Phone</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>123 456 7890</p>
+                                            <p th:text="${user.getEmail()}"></p>
                                         </div>
                                     </div>
                                     <div class="row bb">
@@ -145,7 +131,7 @@
                                             <label>Date of Birth</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <p>18-09-1999</p>
+                                            <p th:text="${date}"></p>
                                         </div>
                                     </div>
                                     <div class="row bb">
@@ -153,55 +139,24 @@
                                             <label>Profession</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <p>Web Developer and Designer</p>
+                                            <p th:text="${user.getProfession()}"></p>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <a type="button" class="btn btn-secondary  mt-4 ms-auto w-25" href="#">Edit</a>
+                                    <div class="row" >
+                                        <a type="button" class="btn btn-secondary  mt-4 ms-auto w-25" href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Edit</a>
                                     </div>
+
+
 
                                 </div>
 
                             </div><!-- end profile -->
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                 <div class="profile-table">
-                                    <div class="row bb">
+                                    <div class="row bb" th:each="board: ${user.getBoardLists()}">
                                         <div class="board-row">
                                             <a href="">
-                                                <p> Board 1</p>
-                                                <i class="fas fa-th-list"></i>
-                                            </a>
-                                        </div>
-
-                                    </div>
-                                    <div class="row bb">
-                                        <div class="board-row">
-                                            <a href="">
-                                                <p> Board 2</p>
-                                                <i class="fas fa-th-list"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="row bb">
-                                        <div class="board-row">
-                                            <a href="">
-                                                <p> Board 3</p>
-                                                <i class="fas fa-th-list"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="row bb">
-                                        <div class="board-row">
-                                            <a href="">
-                                                <p> Board 4</p>
-                                                <i class="fas fa-th-list"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="row bb">
-                                        <div class="board-row">
-                                            <a href="">
-                                                <p> Board 5</p>
+                                                <p th:text="${board.getBoardName()}"></p>
                                                 <i class="fas fa-th-list"></i>
                                             </a>
                                         </div>
@@ -214,36 +169,11 @@
                             </div><!-- end borde -->
                             <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                                 <div class="profile-table">
-                                    <div class="row bb mb-1 pb-2">
-                                        <div class="friend">
+                                    <div class="row bb mb-1 pb-2" th:each="user: ${user.getFriends()}">
+                                        <div class="friend" >
                                             <img src="./img/avatar.png" class="rounded-circle" alt="">
-                                            <p>name of friend</p>
+                                            <p th:text="${user.getFirstName()}"></p>
                                             <i class="fas fa-star"></i>
-
-                                        </div>
-                                    </div>
-                                    <div class="row bb mb-1 pb-2">
-                                        <div class="friend">
-                                            <img src="./img/avatar.png" class="rounded-circle" alt="">
-                                            <p>name of friend</p>
-                                            <i class="fas fa-star"></i>
-
-                                        </div>
-                                    </div>
-                                    <div class="row bb mb-1 pb-2">
-                                        <div class="friend">
-                                            <img src="./img/avatar.png" class="rounded-circle" alt="">
-                                            <p>name of friend</p>
-                                            <i class="fas fa-star"></i>
-
-                                        </div>
-                                    </div>
-                                    <div class="row bb">
-                                        <div class="friend">
-                                            <img src="./img/avatar.png" class="rounded-circle" alt="">
-                                            <p>name of friend</p>
-                                            <i class="fas fa-star"></i>
-
                                         </div>
                                     </div>
                                 </div>
