@@ -42,8 +42,8 @@
 
 
 
-<div class="card border-primary mb-3" th:each="sec1 : ${sec2}" style="max-width: 18rem;">
-<!--    <div class="card border-primary mb-3"  >-->
+<div th:each="sec1 : ${sec2}" style="max-width: 18rem;">
+    <div class="card border-primary mb-3"  >
         <div  class="card-header"   th:text="${sec1.title}">
 
         <form method="get" th:action="@{/deleteSection/{id}(id=${boardList.id})}">
@@ -87,8 +87,8 @@
 
      </div>
     </div>
+ </div>
 </div>
-
 
 
 <hr/>
