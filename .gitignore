@@ -18,7 +18,8 @@ build/
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
-
+!**/src/main/resources/application.properties
+!**/src/main/java/com/tododev/ToDoBot/security/WebSecurityConfig.java
 ### IntelliJ IDEA ###
 .idea
 *.iws
