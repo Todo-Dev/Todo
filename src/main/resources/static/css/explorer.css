@@ -2,10 +2,10 @@ h1{
     color: red;
 }
 .searchCard{
-    width: 10rem;
+    width: 52vw !important;
+    left: 20.1rem;
 }
 .containerCard{
-    border: 1px solid black;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -22,9 +22,35 @@ h1{
     width: 2rem;
     height: 2rem;
 }
-.addUserImg{
-    width: 2.3rem;
+
+.UserButtonInExplorer{
     position: absolute;
-    top: 10px;
+    top: 1px;
     right: 20px;
 }
+.explorerUser{
+    margin: 10px;
+}
+.explorerUser:hover{
+    transform: scale(1.2) ;
+}
+.addUserImg{
+    width: 2.0rem;
+}
+
+.searchButton{
+    border-color: #00000045 !important;
+}
+
+.searchButton:hover {
+    color: #fff;
+    background-color: #f3f3f3;
+    border-color: #6c757d59;
+}
+.addFriendButton{
+    border: none;
+    background-color: #ffffff00;
+}
+
+
+

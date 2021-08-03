@@ -4,9 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 public class ApplicationUser implements UserDetails {
@@ -23,6 +21,20 @@ public class ApplicationUser implements UserDetails {
     private Date dateOfBirth;
     private String profession;
 
+    @ManyToMany(mappedBy = "friends")
+    Set<ApplicationUser> user = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "friends",
+            joinColumns = { @JoinColumn (name = "user_Id")},
+            inverseJoinColumns = {@JoinColumn(name = "friend_Id")}
+    )
+     Set<ApplicationUser> friends = new HashSet<>();
+
+    public Set<ApplicationUser> getFriends() {
+        return friends;
+    }
 
     @OneToMany(mappedBy = "applicationUser")
     List<BoardList> boardLists;
@@ -52,6 +64,26 @@ public class ApplicationUser implements UserDetails {
 
     public Long getId() {
         return id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public String getProfession() {
+        return profession;
     }
 
     @Override
