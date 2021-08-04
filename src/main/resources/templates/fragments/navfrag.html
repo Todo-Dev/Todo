@@ -10,6 +10,7 @@
 
 </head>
 <body>
+
 <!-- start upper bar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top pt-3 pb-3" th:fragment="nav">
     <div class="container">
@@ -17,7 +18,7 @@
                 aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand me-4" href="/">Navbar</a>
+        <a class="navbar-brand me-4" href="/"><img style="width: 120px;" th:src="@{/img/logo.png}" alt=""></a>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item dropdown" th:if="${user}">
@@ -32,7 +33,7 @@
 
                         <li>
                             <button type="button" class="card-text addBoardButton" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal" data-bs-whatever="@mdo">
+                                    data-bs-target="#addBoard" data-bs-whatever="@mdo">
                                 <a class="dropdown-item"><i class="fas fa-plus"></i> Add Board</a>
                             </button>
                         </li>
