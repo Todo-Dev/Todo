@@ -1,6 +1,7 @@
 package com.tododev.ToDoBot.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,7 @@ public class BoardList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotEmpty()
     @Column(nullable = false)
     private String boardName;
     private String description;

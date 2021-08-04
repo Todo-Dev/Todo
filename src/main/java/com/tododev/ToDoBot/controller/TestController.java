@@ -143,7 +143,6 @@ public class TestController {
             }else{
                 beforeSection = sections.peek().getId();
                 sections.remove();
-
             }
         }
         Task task=taskRepository.findById(taskId).get();
