@@ -2,7 +2,6 @@ package com.tododev.ToDoBot.security;
 
 import com.tododev.ToDoBot.repository.ApplicationUserRepository;
 import com.tododev.ToDoBot.service.ActiveUserStore;
-import jdk.nashorn.tools.Shell;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;

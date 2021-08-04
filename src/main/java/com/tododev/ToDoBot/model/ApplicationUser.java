@@ -68,6 +68,7 @@ public class ApplicationUser implements UserDetails {
     }
 
     @OneToMany(mappedBy = "applicationUser")
+    @OrderBy("id")
     List<BoardList> boardLists;
 
     public ApplicationUser(String username, String password, String firstName, String lastName, String email, Date dateOfBirth, String profession , String bio) {
