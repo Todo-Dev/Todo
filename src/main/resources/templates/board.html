@@ -16,85 +16,125 @@
     <link rel="stylesheet" href="fontawesome-free-5.15.1-web/css/all.css">
     <link rel="stylesheet" th:href="@{/css/index.css}">
     <link rel="stylesheet" href="css/myboards.css">
-    <link type="text/css" rel="stylesheet" th:href="@{/css/board.css}">
+    <link rel="stylesheet" th:href="@{/css/board.css}">
     <script src="https://kit.fontawesome.com/9e5d1913ca.js" crossorigin="anonymous"></script>
 
 </head>
 
-<body >
+<body>
 <nav th:replace="fragments/navfrag :: nav"></nav>
-
-<h1 th:text="${boardList.boardName}"></h1>
+<div class="board-body">
+    <h1 th:text="${boardList.boardName}"></h1>
 <input  type="submit" value="Update Board Info" class="btn btn-info"  data-bs-toggle="modal" th:attr="data-bs-target='#updateBoard'+${boardList.id}">
 
-<h3>Section form</h3>
+    <h3 class="section-form">Section form</h3>
 
-
-<form th:action="@{/newSection/{id}(id=${boardList.id})}" method="post">
-    <input type="text" name="title"/>
-    <input  class="bi bi-plus-circle-fill" type="submit" value="+" />
-</form>
-
-
-
-
-
-<div class="space-edge">
-    <div class="d-flex gap flex-wrap flex-center" >
-
-<div class="card-container" th:each="sec1 : ${sec2}" style="max-width: 18rem; ">
-
-<!--    <div class="card border-primary mb-3"  >-->
-        <div  class="card-header"   th:text="${sec1.title}"></div>
-    <form method="get" th:action="@{/deleteSection/{id}(id=${boardList.id})}">
-        <input type="hidden" th:value="${sec1.id}" name="secId">
-        <input type="submit" value="Delete Section">
+    <form class="section-form" th:action="@{/newSection/{id}(id=${boardList.id})}" method="post">
+        <input type="text" name="title" maxlength="25" required/>
+        <button  class="add-section" type="submit"><span><i class="fa fa-plus" > </i> </span></button>
     </form>
-<!--    <form method="post" th:action="@{'/section/update/' +${boardList.id}+ '/'+${sec1.id}}" id="updateSectionForm">-->
+
+    <div class="space-edge">
+        <div class="d-flex flex-wrap flex-center">
+            <!--14-->
+            <div class="card-container" th:each="sec1 : ${sec2}" style="max-width:18rem; ">
+                <div class="card board-border">
+                    <div class="card-header">
+                        <h4 th:text="${sec1.title}"></h4>
+                        <form method="get" th:action="@{/deleteSection/{id}(id=${boardList.id})}">
+                            <input type="hidden" th:value="${sec1.id}" name="secId" >
+                            <button  class="section-button" type="submit"><span><i class="fa fa-minus"> </i> </span></button>
+                        </form>
+
+                    <!--    <form method="post" th:action="@{'/section/update/' +${boardList.id}+ '/'+${sec1.id}}" id="updateSectionForm">-->
         <input  th:attr="onclick=|myFunction('${sec1.title}', '${sec1.id}')|" type="button" value="Update Section Info" class="btn btn-info"  data-bs-toggle="modal"  data-bs-target="#updateSection" >
-<!--    </form>-->
-    <button th:attr="onclick=|myFunction('${sec1.title}', '${sec1.id}')|">jaradat</button>
-
-    <div class="card-body text-primary" >
-           <form th:action="@{/newTask/{id}(id=${sec1.id})}" method="post">
-            <input type="text" name="taskName"/>
-               <input type="text" name="description"/>
-            <input  type="submit" value="+"/>
-
-            </form>
-       <div  th:each=" task : ${sec1.getTaskList()}" >
-           <!--           update Task-->
-           <input  th:attr="onclick=|myFunctionTask('${task.taskName}', '${task.description}', '${task.id}')|" type="button" value="Update Task Info" class="btn btn-info"  data-bs-toggle="modal"  data-bs-target="#updateTask" >
-           <!--           space-->
-
-           <h5 class="card-title"> taskName : <span th:text="${task.taskName}"></span></h5>
-           <p class="card-text"> description : <span th:text="${task.description}"></span></p>
-           <form method="get" th:action="@{/deleteTask/{id}(id=${boardList.id})}">
-               <input type="hidden" th:value="${task.id}" name="taskId">
-               <input type="submit" value="-">
-           </form>
-
-
-           <form method="get" th:action="@{/moveNext/{id}(id=${boardList.id})}" th:unless="${lastSec==sec1}" >
-               <input type="hidden" th:value="${sec1.id}" name="sectionId">
-               <input type="hidden" th:value="${task.id}" name="taskId">
-               <input type="submit" value=">">
-           </form>
-           <form method="get" th:action="@{/moveBack/{id}(id=${boardList.id})}" th:unless="${firstSec==sec1}" >
-               <input type="hidden" th:value="${sec1.id}" name="sectionId">
-               <input type="hidden" th:value="${task.id}" name="taskId">
-               <input type="submit" value="<">
-           </form>
-
+        <!--    </form>-->
+            <button th:attr="onclick=|myFunction('${sec1.title}', '${sec1.id}')|">jaradat</button>
+        
         </div>
 
 
-    </div>
- </div>
-</div>
-</div>
-</div>
+                    <div class="card-body board-text text-border">
+                        <form th:action="@{/newTask/{id}(id=${sec1.id})}" method="post">
+                            <input class="card-input text-border" type="text" name="taskName" required
+                                   placeholder="Task name..." maxlength="30"/>
+                            <input class="card-input text-border" type="text" name="description"
+                                   placeholder="Description..." />
+                            <button class="task-button" type="submit"><span><i class="fa fa-plus"> </i> </span></button>
+                        </form>
 
+                        <!--                    <button type="button" class="card-text" data-bs-toggle="modal" data-bs-target="#exampleModal"-->
+                        <!--                            data-bs-whatever="@mdo">-->
+                        <!--                        <a>+</a>-->
+                        <!--                    </button>-->
+
+                        <!--                    &lt;!&ndash;Modal for creating a new board&ndash;&gt;-->
+                        <!--                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"-->
+                        <!--                         aria-hidden="true">-->
+                        <!--                        <div class="modal-dialog">-->
+                        <!--                            <div class="modal-content">-->
+                        <!--                                <div class="modal-header">-->
+                        <!--                                    <h5 class="modal-title" id="exampleModalLabel">Add Board Information</h5>-->
+                        <!--                                    <button type="button" class="btn-close" data-bs-dismiss="modal"-->
+                        <!--                                            aria-label="Close"></button>-->
+                        <!--                                </div>-->
+                        <!--                                <div class="modal-body">-->
+                        <!--                                    <form th:action="@{/newTask/{id}(id=${sec1.id})}" method="post">-->
+                        <!--                                        <div class="mb-3">-->
+                        <!--                                            <label for="recipient-name" class="col-form-label">Task Name:</label>-->
+                        <!--                                            <input type="text" class="form-control" id="recipient-name"-->
+                        <!--                                                   name="taskName" required>-->
+                        <!--                                        </div>-->
+                        <!--                                        <div class="mb-3">-->
+                        <!--                                            <label for="message-text" class="col-form-label">Description:</label>-->
+                        <!--                                            <textarea class="form-control" id="message-text"-->
+                        <!--                                                      name="description"></textarea>-->
+                        <!--                                        </div>-->
+
+                        <!--                                        <div class="modal-footer">-->
+                        <!--                                            <button type="submit" class="btn btn-info  me-2 adds">Add</button>-->
+                        <!--                                        </div>-->
+                        <!--                                    </form>-->
+                        <!--                                </div>-->
+                        <!--                            </div>-->
+                        <!--                        </div>-->
+                        <!--                    </div>-->
+
+
+                        <!-- Modal End -->
+                        <div class="task-item" th:each=" task : ${sec1.getTaskList()}">
+
+                            <h5 class="card-title"><span th:text="${task.taskName}"></span></h5>
+                            <p class="card-text"><span th:text="${task.description}"></span></p>
+                            <div class="task-buttons">
+                                <form class="task-form" method="get"
+                                      th:action="@{/deleteTask/{id}(id=${boardList.id})}">
+                                    <input type="hidden" th:value="${task.id}" name="taskId">
+                                    <button class="task-button" type="submit"><span><i class="fa fa-minus"> </i> </span></button>
+                                </form>
+
+                                <form class="task-form" method="get" th:action="@{/moveBack/{id}(id=${boardList.id})}"
+                                      th:unless="${firstSec==sec1}">
+                                    <input type="hidden" th:value="${sec1.id}" name="sectionId">
+                                    <input type="hidden" th:value="${task.id}" name="taskId">
+                                    <button class="task-button" type="submit"><span><i class="fa fa-arrow-left"> </i> </span></button>
+                                </form>
+
+                                <form class="task-form" method="get" th:action="@{/moveNext/{id}(id=${boardList.id})}"
+                                      th:unless="${lastSec==sec1}">
+                                    <input type="hidden" th:value="${sec1.id}" name="sectionId">
+                                    <input type="hidden" th:value="${task.id}" name="taskId">
+                                    <button class="task-button" type="submit"><span><i class="fa fa-arrow-right"> </i> </span></button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <hr/>
@@ -200,6 +240,5 @@ function myFunctionTask(tName, tDesc, tId){
 </script>
 
 </body>
+
 </html>
-
-
