@@ -165,7 +165,6 @@ for (var i = 0; i < completedTasksHolder.children.length; i++) {
 
 
 
-=======
 
 alert("hello")
 function addTask() {
@@ -177,4 +176,3 @@ function addTask() {
   /* Clear task text from input after adding task */
   document.getElementById("taskText").value = "";
 }
->>>>>>> main
