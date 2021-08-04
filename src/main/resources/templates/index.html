@@ -17,6 +17,34 @@
 
 <!-- start upper bar -->
 <nav th:replace="fragments/navfrag :: nav"></nav>
+<div class="modal fade" id="addBoard" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Board Information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{/newBoard}" method="post">
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Board Name:</label>
+                        <input type="text" class="form-control" id="recipient-name" name="boardName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Description:</label>
+                        <textarea class="form-control" id="message-text" name="description"></textarea>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-info  me-2 adds">Add</button>
+                        <button type="button" class="btn btn-secondary  me-2 adds" data-bs-dismiss="modal">Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- end upper bar -->
 <!-- start hero img section  -->
@@ -28,7 +56,7 @@
         <p>Makes our life organized, and more productive!<br>
             Write everything down and free up your mental space, <br> What you need is to <b>Join us</b>,<br> one button
             can make your life easier! </p>
-        <a type="button" class="btn btn-info w-25 mt-2" href="/signup" target="_blank">Sign Up</a>
+        <a type="button" class="btn btn-info w-25 mt-2" href="/signup" target="_blank" sec:authorize = "!isAuthenticated()">Sign Up</a>
 
     </div>
     <div class="custom-shape-divider-bottom-1627680856">
@@ -81,7 +109,7 @@
         <p><b>Don't forget us !</b> <br>
             Keep a journal to download the inner chatter that’s constantly interrupting your thought process when you’re
             trying to get important things done or invite your team to organize thing together.</p>
-        <a type="button" class="btn btn-secondary  w-25" href="/login" target="_blank">Login</a>
+        <a type="button" class="btn btn-secondary  w-25" href="/login" target="_blank" sec:authorize = "!isAuthenticated()">Login</a>
     </div>
 </section>
 <!-- end section #3 -->
@@ -198,40 +226,12 @@
 <!-- end footer -->
 
 <!--Modal for creating a new board-->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add Board Information</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form th:action="@{/newBoard}" method="post">
-                    <div class="mb-3">
-                        <label for="recipient-name" class="col-form-label">Board Name:</label>
-                        <input type="text" class="form-control" id="recipient-name" name="boardName" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="message-text" class="col-form-label">Description:</label>
-                        <textarea class="form-control" id="message-text" name="description"></textarea>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-info  me-2 adds">Add</button>
-                        <button type="button" class="btn btn-secondary  me-2 adds" data-bs-dismiss="modal">Cancel
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
-<script href="modal.js"></script>
+<script th:href="@{/modal.js}"></script>
 
 </body>
 </html>
