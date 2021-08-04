@@ -19,6 +19,7 @@ bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
 !**/src/main/resources/application.properties
+!**/build.gradle/
 !**/src/main/java/com/tododev/ToDoBot/security/WebSecurityConfig.java
 ### IntelliJ IDEA ###
 .idea
