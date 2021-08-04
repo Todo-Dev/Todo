@@ -106,7 +106,8 @@ public class TestController {
         sections.addAll(boardList.getSections());
 
         Long nextSection = null;
-        for(int i = 0; i < sections.size(); i++){
+        int loopTimes = sections.size();
+        for(int i = 0; i < loopTimes; i++){
             if(sections.peek().getId() == sectionId){
                 sections.remove();
                 nextSection = sections.peek().getId();
@@ -128,7 +129,8 @@ public class TestController {
         boolean bh=false;
         sections.addAll(boardList.getSections());
         Long beforeSection = null;
-        for(int i = 0; i < sections.size(); i++){
+        int loopTimes = sections.size();
+        for(int i = 0; i < loopTimes; i++){
 
             if(sections.peek().getId() == sectionId){
                 break;
