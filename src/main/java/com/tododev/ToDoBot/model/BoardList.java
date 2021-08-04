@@ -1,6 +1,7 @@
 package com.tododev.ToDoBot.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,7 @@ public class BoardList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotEmpty()
     @Column(nullable = false)
     private String boardName;
     private String description;
@@ -19,9 +21,8 @@ public class BoardList {
     ApplicationUser applicationUser;
 
     @OneToMany(mappedBy = "boardList",cascade = CascadeType.ALL)
+    @OrderBy("id")
     List<Section> sections;
-
-
 
     public BoardList() {
     }
@@ -51,5 +52,21 @@ public class BoardList {
 
     public List<Section> getSections() {
         return sections;
+    }
+
+    public void setBoardName(String boardName) {
+        this.boardName = boardName;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setApplicationUser(com.tododev.ToDoBot.model.ApplicationUser applicationUser) {
+        this.applicationUser = applicationUser;
+    }
+
+    public void setSections(List<com.tododev.ToDoBot.model.Section> sections) {
+        this.sections = sections;
     }
 }

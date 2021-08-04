@@ -34,12 +34,6 @@ public class MainController {
         return "index";
     }
 
-    @GetMapping("/onlineusers")
-    public String getOnline(Locale locale ,Model model){
-        model.addAttribute("users", activeUserStore.getUsers());
-        System.out.println(activeUserStore.getUsers());
-        return "online";
-    }
     @GetMapping("/profile")
     public String getProfilePage(Principal principal,Model model) {
         if (principal==null){
@@ -49,6 +43,7 @@ public class MainController {
             String dob = loggedUser.getDateOfBirth().toString();
             model.addAttribute("user", loggedUser);
             model.addAttribute("date" , dob);
+            model.addAttribute("active", activeUserStore.users);
         }
         return "profile";
     }

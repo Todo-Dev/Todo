@@ -1,0 +1,94 @@
+.board-border {
+      margin: 13px 20px;
+      border-color: #0dcaf0 !important;
+      
+}
+
+.text-border{
+border: .5px solid #0dcaf0 !important;
+}
+  .board-text, .card-title , .card-text{
+    color: #0dcaf0 !important;
+  }
+
+  .board-body{
+    padding-inline: 32px;
+    color: rgba(0,0,0,.5) !important;
+
+  }
+  .card-input{
+      margin: 3px auto;
+      width: 10em;
+      }
+
+
+      /* fancy Button */
+      	i {
+      		margin-top: -2px;
+      		font-size: 1.265em;
+      		vertical-align: middle;
+      	}
+
+
+.card-container{
+    background-color: #e2e4e4 !important;
+    margin: 15px;
+  }
+  .card-title,.card-text {
+    margin-bottom: 1px;
+}
+
+  .task-item{
+    margin: 5px;
+    text-align: center;
+  }
+  .card-header{
+    background-color:  #ffffcc !important   ;
+  }
+  .card-body{
+    background-color:   #ffffe6    !important;
+  }
+
+
+.card-container:nth-child(4n + 1) {
+  background-color: #cce6fc !important;
+
+}
+
+.card-container:nth-child(4n + 2) {
+  background-color: #fef2cd !important;
+
+}
+
+.card-container:nth-child(4n + 3) {
+  background-color: #d2edd9 !important;
+
+}
+.task-buttons,.card-header{
+  display: flex;
+  flex-wrap:wrap;
+  flex-flow: row;
+  justify-content: center;
+}
+.task-form{
+   padding-inline: 5px;
+}
+.task-button,.section-button,.add-section{
+   border: none;
+   text-decoration: none;
+   font-size: 16px;
+   cursor: pointer;
+   background-color: #ffffe6 ;
+   color: #0dcaf0;
+   border: 0px ;
+}
+.section-button{
+  background-color:  #ffffcc !important ;
+}
+.add-section{
+  background-color: white !important;
+  color: rgba(0,0,0,.5) !important;
+}
+.section-form{
+padding-inline: 15px;
+}

@@ -51,15 +51,44 @@
                         <label for="profession" class="form-label">Profession</label>
                         <input type="text" class="form-control" name="profession" id="profession" th:value="${user.getProfession().toString()}" th:placeholder="${user.getProfession()}">
                     </div>
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Save</button>
-            </div>
+
         </div>
     </div>
 </div>
+<!--End of modal-->
+<!--Start of modal-->
+<div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel1">Add Bio</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{/updatebio}" th:method="POST">
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Bio</label>
+                        <textarea class="form-control" th:text="${user.getBio()}" id="exampleFormControlTextarea1" name ="bio" rows="3" th:placeholder="${user.getBio()}"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+<!--                    <button type="submit" class="btn btn-primary">Save</button>-->
+                </form>
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+<!--End of modal-->
 <main>
     <div class="background-section">
     </div>
@@ -75,7 +104,7 @@
                     <i class="fa fa-pinterest p-2"></i>
                 </p>
                 <p class="bio" th:text="${user.getBio()}"></p>
-                <p class="bio-edit"><i class="fas fa-edit"></i></p>
+                <a class="bio-edit" data-bs-toggle="modal" data-bs-target="#staticBackdrop1"><i class="fas fa-edit"></i></a>
             </div>
             <div class="all-tabs">
                 <div class="row">
@@ -162,7 +191,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <a type="button" class="btn btn-secondary  mt-4 ms-auto w-25" href="#">Edit</a>
+                                        <a type="button" class="btn btn-secondary  mt-4 ms-auto w-25" href="/myboards">Go To Boards</a>
                                     </div>
 
                                 </div>
@@ -173,7 +202,11 @@
                                         <div class="friend" >
                                             <img src="./img/avatar.png" class="rounded-circle" alt="">
                                             <p th:text="${user.getFirstName()}"></p>
-                                            <i class="fas fa-star"></i>
+                                            <p th:text="${active.contains(user.getUsername())}">
+
+                                            </p>
+                                            <i th:if="${active.contains(user.getUsername())}" class="fas fa-circle online"></i>
+                                            <i th:unless="${active.contains(user.getUsername())}" class="fas fa-circle offline"></i>
                                         </div>
                                     </div>
                                 </div>

@@ -8,9 +8,11 @@ import com.tododev.ToDoBot.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -54,16 +56,6 @@ public class TestController {
             model.addAttribute("lastSec", lists.get(lists.size() - 1));
             model.addAttribute("firstSec", lists.get(0));
         }
-//
-//        List<Section> lists=new ArrayList<>();
-//        Section todo=new Section("TO-DO",boardList);
-//        Section inProgress=new Section("IN-progress",boardList);
-//        Section done=new Section("DONE",boardList);
-//        lists.add(todo);
-//        lists.add(inProgress);
-//        lists.add(done);
-//
-//        model.addAttribute("sectionLists",lists);
 
         return "board";
     }
@@ -114,7 +106,8 @@ public class TestController {
         sections.addAll(boardList.getSections());
 
         Long nextSection = null;
-        for(int i = 0; i < sections.size(); i++){
+        int loopTimes = sections.size();
+        for(int i = 0; i < loopTimes; i++){
             if(sections.peek().getId() == sectionId){
                 sections.remove();
                 nextSection = sections.peek().getId();
@@ -136,20 +129,82 @@ public class TestController {
         boolean bh=false;
         sections.addAll(boardList.getSections());
         Long beforeSection = null;
-        for(int i = 0; i < sections.size(); i++){
+        int loopTimes = sections.size();
+        for(int i = 0; i < loopTimes; i++){
 
             if(sections.peek().getId() == sectionId){
                 break;
             }else{
                 beforeSection = sections.peek().getId();
                 sections.remove();
-
             }
         }
         Task task=taskRepository.findById(taskId).get();
 
        task.setSection(sectionRepository.findById(beforeSection).get());
         taskRepository.save(task);
+        return new RedirectView("/board/" + id);
+    }
+
+    /**
+     * This End point for updating the board info
+     * @param id
+     * @param boardName
+     * @param description
+     * @return
+     */
+    @PostMapping("/board/update/{id}")
+    RedirectView updateBoard(@PathVariable Long id,
+                       @RequestParam String boardName,
+                       @RequestParam String description) {
+        BoardList boardList = boardListRepository.findById(id).get();
+        boardList.setBoardName(boardName);
+        boardList.setDescription(description);
+
+        boardListRepository.save(boardList);
+        return new RedirectView("/board/" + id);
+    }
+
+    /**
+     * This End Point for updating Section info
+     * @param id
+     * @param currentSectionId
+     * @param secTitle
+     * @return
+     */
+
+    @PostMapping("/section/update")
+    RedirectView updateSection(@RequestParam Long id,
+                               @RequestParam Long currentSectionId,
+                               @RequestParam String secTitle
+                               ){
+        Section updatedSection = sectionRepository.findById(currentSectionId).get();
+        updatedSection.setTitle(secTitle);
+        sectionRepository.save(updatedSection);
+
+        return new RedirectView("/board/" + id);
+    }
+
+
+    /**
+     * This End Point for updating Task info
+     * @param id
+     * @param taskId
+     * @param taskName
+     * @param taskDescription
+     * @return
+     */
+    @PostMapping("/task/update")
+    RedirectView updateTask(@RequestParam Long id,
+                            @RequestParam Long taskId,
+                            @RequestParam String taskName,
+                            @RequestParam String taskDescription
+                            ){
+        Task updatedTask = taskRepository.findById(taskId).get();
+        updatedTask.setTaskName(taskName);
+        updatedTask.setDescription(taskDescription);
+        taskRepository.save(updatedTask);
+
         return new RedirectView("/board/" + id);
     }
 
