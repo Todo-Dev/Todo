@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -18,9 +18,12 @@
     <div class="col">
       <div class="d-flex justify-content-between align-items-center friend-card" th:each="friend : ${friends}">
         <img class="userImage" th:src="@{/img/avatar.png}" />
-        <h5>Ahmad</h5>
-        <p style="margin-top: 5px;">online</p>
-        <button class="btn btn-info  me-2 adds">Unfriend</button>
+        <h5 th:text="${friend.getUsername()}"></h5>
+        <i th:if="${active.contains(friend.getUsername())}" class="fas fa-circle online"></i>
+        <i th:unless="${active.contains(friend.getUsername())}" class="fas fa-circle offline"></i>
+        <form th:action="@{/unfriend/{id}(id=${friend.getId()})}" th:method="post">
+        <button class="btn btn-info  me-2 adds " type="submit"><i class="fas fa-users-slash"></i></button>
+        </form>
       </div>
     </div>
   </div>
