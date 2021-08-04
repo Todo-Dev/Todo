@@ -2,6 +2,7 @@ package com.tododev.ToDoBot.controller;
 
 import com.tododev.ToDoBot.model.ApplicationUser;
 import com.tododev.ToDoBot.repository.ApplicationUserRepository;
+import com.tododev.ToDoBot.service.ActiveUserStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -25,6 +26,8 @@ public class AuthController {
     ApplicationUserRepository applicationUserRepository;
     @Autowired
     BCryptPasswordEncoder encoder;
+    @Autowired
+    ActiveUserStore activeUserStore;
     /*
     Login And signup controllers
      */
@@ -54,6 +57,7 @@ public class AuthController {
         applicationUserRepository.save(newUser);
         Authentication auth = new UsernamePasswordAuthenticationToken(newUser , null , new ArrayList<>());
         SecurityContextHolder.getContext().setAuthentication(auth);
+        activeUserStore.users.add(newUser.getUsername());
         return new RedirectView("/");
     }
 
