@@ -18,9 +18,6 @@ build/
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
-!**/src/main/resources/application.properties
-!**/build.gradle/
-!**/src/main/java/com/tododev/ToDoBot/security/WebSecurityConfig.java
 ### IntelliJ IDEA ###
 .idea
 *.iws
@@ -39,3 +36,14 @@ out/
 
 ### VS Code ###
 .vscode/
+
+
+### Try all ways for adding application.properties ###
+src/main/resources/application.properties
+application.properties
+*.properties
+!**/src/main/resources/application.properties
+!**/src/main/resources/application.properties/
+
+
+
