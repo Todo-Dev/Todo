@@ -43,7 +43,7 @@ public class MainController {
             String dob = loggedUser.getDateOfBirth().toString();
             model.addAttribute("user", loggedUser);
             model.addAttribute("date" , dob);
-            model.addAttribute("active", activeUserStore.getUsers());
+            model.addAttribute("active", activeUserStore.users);
         }
         return "profile";
     }

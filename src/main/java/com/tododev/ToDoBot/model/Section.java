@@ -17,6 +17,7 @@ public class Section {
     BoardList boardList;
 
     @OneToMany(mappedBy = "section" ,cascade = CascadeType.ALL)
+    @OrderBy("id")
     List<Task> taskList;
 
 
@@ -45,4 +46,15 @@ public class Section {
         return boardList;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setBoardList(BoardList boardList) {
+        this.boardList = boardList;
+    }
+
+    public void setTaskList(List<Task> taskList) {
+        this.taskList = taskList;
+    }
 }
