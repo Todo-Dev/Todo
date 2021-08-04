@@ -69,11 +69,11 @@ public class TestController {
     }
 
 
-    @PostMapping("/newTask/{id}")
-    public RedirectView newTask(@RequestParam String taskName, String description, @PathVariable Long id) {
-        Section section = sectionRepository.getById(id);
+    @PostMapping("/newTask")
+    public RedirectView newTask(@RequestParam String taskTitle, String newTaskDescription, Long SectionId) {
+        Section section = sectionRepository.getById(SectionId);
 
-        taskRepository.save(new Task(taskName, description, section));
+        taskRepository.save(new Task(taskTitle, newTaskDescription, section));
 
         long boardId = section.getBoardList().getId();
         return new RedirectView("/board/" + boardId);
