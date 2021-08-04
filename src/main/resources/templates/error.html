@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>error</title>
+
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Roboto:400,100,300,500);
+table{
+
+    padding-inline-start: 36%
+
+}
+
+body {
+  background-color: #0dcaf0;
+  color: #fff;
+  font-size: 100%;
+  line-height: 1.5;
+  font-family: "Roboto", sans-serif;
+}
+
+.button {
+  font-weight: 300;
+  color: #fff;
+  font-size: 1.2em;
+  text-decoration: none;
+  border: 1px solid #efefef;
+  padding: .5em;
+  border-radius: 3px;
+  float: left;
+  margin: -19em 0 0 -155px;
+  left: 50%;
+  position: relative;
+  transition: all .3s linear;
+}
+
+.button:hover {
+  background-color: #007aff;
+  color: #fff;
+}
+
+p {
+  font-size: 2em;
+  text-align: center;
+  font-weight: 100;
+}
+
+h1 {
+  text-align: center;
+  font-size: 10em;
+  font-weight: 100;
+  margin-top: 10px;
+  }
+
+
+    </style>
+</head>
+
+
+<body>
+<h1>404</h1>
+<p>Oops! Something is wrong.</p>
+<table style='font-family:"Roboto", sans-serif;'>
+    <tr>
+        <td>Date</td>
+        <td th:text="${timestamp}" style="font-family: 'Roboto', sans-serif;"></td>
+    </tr>
+    <tr>
+        <td>Path</td>
+        <td th:text="${path}"></td>
+    </tr>
+    <tr>
+        <td>Error</td>
+        <td th:text="${error}"></td>
+    </tr>
+    <tr>
+        <td>Status</td>
+        <td th:text="${status}"></td>
+    </tr>
+    <tr>
+        <td>Message</td>
+        <td th:text="${message}"></td>
+    </tr>
+    <tr>
+        <td>Exception</td>
+        <td th:text="${exception}"></td>
+    </tr>
+    <tr>
+        <td>Trace</td>
+        <td>
+            <pre th:text="${trace}"></pre>
+        </td>
+    </tr>
+</table>
+<a class="button" href="/"><i class="icon-home"></i> Go back in Home page, is better.</a>
+
+</body>
+</html>
