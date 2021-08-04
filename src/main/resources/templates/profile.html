@@ -73,7 +73,7 @@
                 <form th:action="@{/updatebio}" th:method="POST">
                     <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="form-label">Bio</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" name ="bio" rows="3" th:placeholder="${user.getBio()}"></textarea>
+                        <textarea class="form-control" th:text="${user.getBio()}" id="exampleFormControlTextarea1" name ="bio" rows="3" th:placeholder="${user.getBio()}"></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Save</button>
