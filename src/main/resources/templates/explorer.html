@@ -18,9 +18,9 @@
 <nav th:replace="fragments/navfrag :: nav"></nav>
 
 <div class="searchCard searchTagDescResult input-group mb-3">
-    <form th:action="@{/findUser}" method="get">
-    <input type="text" name="username" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
-    <button class="btn searchButton" type="submit" id="button-addon2" ><img src="/img/search.svg" alt="" class="addUserImg"/></button>
+    <form th:action="@{/findUser}" method="get" class="SearchForm">
+    <input  type="text" name="username" class="form-control searchInput" placeholder="Search Users" aria-label="Recipient's username" aria-describedby="button-addon2">
+    <button class="btn searchButton" type="submit" id="button-addon2" ><img th:src="@{/img/search.svg}" alt="" class="addUserImg"/></button>
     </form>
 </div>
 
