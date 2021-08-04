@@ -27,6 +27,7 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
         HttpSession session = request.getSession(false);
         if (session != null) {
             LoggedUser user = new LoggedUser(authentication.getName(), activeUserStore);
+            activeUserStore.users.add(user.getUsername());
             session.setAttribute("user", user);
         }
         response.sendRedirect("/");

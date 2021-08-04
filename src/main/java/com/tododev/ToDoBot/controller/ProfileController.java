@@ -2,6 +2,7 @@ package com.tododev.ToDoBot.controller;
 
 import com.tododev.ToDoBot.model.ApplicationUser;
 import com.tododev.ToDoBot.repository.ApplicationUserRepository;
+import com.tododev.ToDoBot.service.ActiveUserStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,6 +34,14 @@ public class ProfileController {
         loggedUser.setEmail(email);
         loggedUser.setProfession(profession);
         applicationUserRepository.save(loggedUser);
+        return new RedirectView("/profile");
+    }
+
+    @PostMapping("/updatebio")
+    public RedirectView updateBio(Principal principal , @RequestParam String bio){
+        ApplicationUser foundUser = applicationUserRepository.findApplicationUserByUsername(principal.getName());
+        foundUser.setBio(bio);
+        applicationUserRepository.save(foundUser);
         return new RedirectView("/profile");
     }
 }
