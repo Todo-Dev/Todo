@@ -13,8 +13,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="fontawesome-free-5.15.1-web/css/all.css">
-    <link rel="stylesheet" href="css/index.css">
+<!--    <link rel="stylesheet" href="fontawesome-free-5.15.1-web/css/all.css">-->
+    <link rel="stylesheet" th:href="@{/css/index.css}">
     <script src="https://kit.fontawesome.com/9e5d1913ca.js" crossorigin="anonymous"></script>
 
 </head>
@@ -22,6 +22,8 @@
 <body >
 <nav th:replace="fragments/navfrag :: nav"></nav>
 
+<h1 th:text="${boardList.boardName}"></h1>
+<input  type="submit" value="Update Board Info" class="btn btn-info"  data-bs-toggle="modal" th:attr="data-bs-target='#updateBoard'+${boardList.id}">
 
 <h3>Section form</h3>
 
@@ -32,25 +34,27 @@
 </form>
 
 
-<div class="card border-primary mb-3" style="max-width: 18rem;">
-    <div class="card-header">Header</div>
-    <div class="card-body text-primary">
-        <h5 class="card-title">Primary card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    </div>
+<!--<div class="card border-primary mb-3" style="max-width: 18rem;">-->
+<!--    <div class="card-header">Header</div>-->
+<!--    <div class="card-body text-primary">-->
+<!--        <h5 class="card-title">Primary card title</h5>-->
+<!--        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+<!--    </div>-->
 
 
 
 
 <div class="card border-primary mb-3" th:each="sec1 : ${sec2}" style="max-width: 18rem;">
 <!--    <div class="card border-primary mb-3"  >-->
-        <div  class="card-header"   th:text="${sec1.title}">
-
-        <form method="get" th:action="@{/deleteSection/{id}(id=${boardList.id})}">
-            <input type="hidden" th:value="${sec1.id}" name="secId">
-            <input type="submit" value="Delete">
-        </form>
-        </div>
+        <div  class="card-header"   th:text="${sec1.title}"></div>
+    <form method="get" th:action="@{/deleteSection/{id}(id=${boardList.id})}">
+        <input type="hidden" th:value="${sec1.id}" name="secId">
+        <input type="submit" value="Delete Section">
+    </form>
+<!--    <form method="post" th:action="@{'/section/update/' +${boardList.id}+ '/'+${sec1.id}}" id="updateSectionForm">-->
+        <input  th:attr="onclick=|myFunction('${sec1.title}', '${sec1.id}')|" type="button" value="Update Section Info" class="btn btn-info"  data-bs-toggle="modal"  data-bs-target="#updateSection" >
+<!--    </form>-->
+    <button th:attr="onclick=|myFunction('${sec1.title}', '${sec1.id}')|">jaradat</button>
 
     <div class="card-body text-primary" >
            <form th:action="@{/newTask/{id}(id=${sec1.id})}" method="post">
@@ -60,6 +64,9 @@
 
             </form>
        <div  th:each=" task : ${sec1.getTaskList()}" >
+           <!--           update Task-->
+           <input  th:attr="onclick=|myFunctionTask('${task.taskName}', '${task.description}', '${task.id}')|" type="button" value="Update Task Info" class="btn btn-info"  data-bs-toggle="modal"  data-bs-target="#updateTask" >
+           <!--           space-->
 
            <h5 class="card-title"> taskName : <span th:text="${task.taskName}"></span></h5>
            <p class="card-text"> description : <span th:text="${task.description}"></span></p>
@@ -80,9 +87,6 @@
                <input type="submit" value="Move Back">
            </form>
 
-
-
-
         </div>
 
      </div>
@@ -93,10 +97,106 @@
 
 <hr/>
 
+<!--Sufian's Work-->
+<!--This modal is to update board information-->
+<div >
+    <div class="modal" tabindex="-1"  th:attr="id='updateBoard'+${boardList.id}" >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="post" th:action="@{/board/update/{id}(id=${boardList.id})}">
+                <div class="modal-body">
+                    <input th:field="*{boardList.boardName}" type="text" name="boardName"/>
+                    <input th:field="*{boardList.description}" type="text" name="description"/>
+                </div>
+                <div class="modal-footer">
+
+                        <input type="hidden" th:value="${boardList.id}" name="boardId">
+                        <input  type="submit" value="Update" class="btn btn-info"  data-bs-toggle="modal" data-bs-target="#delete-confirmation">
+
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Sufian's Work-->
+<!--This modal is to update Section information-->
+<div>
+    <div class="modal" tabindex="-1"  th:attr="id=updateSection">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="post" th:action="@{/section/update}">
+                    <div class="modal-body">
+                        <input type="text" id="secTitle" name="secTitle"/>
+                        <input type="text" th:value="${boardList.id}" name="id" hidden readonly/>
+                        <input type="text" id="currentSectionId" name="currentSectionId" hidden readonly/>
+                    </div>
+                    <div class="modal-footer">
+                        <input  type="submit" value="Update" class="btn btn-info"  data-bs-toggle="modal" data-bs-target="#delete-confirmation">
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Sufian's Work-->
+<!--This modal is to update Task information-->
+<div>
+    <div class="modal" tabindex="-1"  th:attr="id=updateTask">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="post" th:action="@{/task/update}">
+                    <div class="modal-body">
+                        <input type="text" id="taskName" name="taskName"/>
+                        <input type="text" th:value="${boardList.id}" name="id" hidden readonly/>
+                        <input type="text" id="taskId" name="taskId" hidden readonly/>
+                        <input type="text" id="taskDescription" name="taskDescription" />
+                    </div>
+                    <div class="modal-footer">
+                        <input  type="submit" value="Update" class="btn btn-info"  data-bs-toggle="modal" data-bs-target="#delete-confirmation">
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
 <script th:src="@{/app.js}"></script>
+<script th:inline="javascript">
+ function myFunction(title, id) {
+
+ console.log(title, id);
+document.getElementById("secTitle").value = title;
+document.getElementById("currentSectionId").value = id;
+
+}
+
+function myFunctionTask(tName, tDesc, tId){
+ console.log(tName, tDesc, tId);
+    document.getElementById("taskName").value = tName;
+    document.getElementById("taskId").value = tId;
+    document.getElementById("taskDescription").value = tDesc;
+}
+</script>
+
 </body>
 </html>
 
