@@ -38,8 +38,11 @@ out/
 .vscode/
 
 
-### Noor ###
+### Try all ways for adding application.properties ###
 src/main/resources/application.properties
-
+application.properties
+*.properties
+!**/src/main/resources/application.properties
+!**/src/main/resources/application.properties/
 
 
