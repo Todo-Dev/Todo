@@ -103,11 +103,11 @@
                         <li><b>To keep track of our ideas:</b> ToDo Bot is a great place to keep all of our thoughts in
                             one place. <br>We can use it to jot down new ideas or expand on older ideas.
                         </li>
-                    <br>
+                        <br>
                         <li><b> To organize our life:</b> With using ToDo Bot we can track our habits, plan our life,
                             and make it simpler and organized.
                         </li>
-                    <br>
+                        <br>
                         <li><b> Helps us and our team move work forward:</b> With using ToDo Bot we can collaborate,
                             manage projects, and reach new productivity peaks.
                         </li>
@@ -127,7 +127,8 @@
             <div class="col">
                 <h1>ToDo Bot</h1>
                 <p><b>Collaboration tool and personal notepad.</b> <br>
-                    Effective strategy for increasing your productivity at work. <br> Also helps you manage personal life.</p>
+                    Effective strategy for increasing your productivity at work. <br> Also helps you manage personal
+                    life.</p>
             </div>
             <div class="col">
                 <h1>Quick links</h1>
@@ -135,21 +136,31 @@
                     <li class="nav-item"><a href="" class="footer-link" target="_blank"><i class="fas fa-home"></i> Home</a>
                     </li>
                     <!-- Not User -->
-                    <div  th:unless="${user}">
-                        <li class="nav-item"><a class="footer-link" th:href="@{/login}" target="_blank"><i class="fas fa-sign-in-alt"></i>Login</a></li>
-                        <li class="nav-item"><a class="footer-link"  th:href="@{/signup}" target="_blank"><i class="fas fa-plus"></i> Sign Up</a></li>
-                    <li class="nav-item"><a class="footer-link" href="https://github.com/Todo-Dev" target="_blank"><i class="fas fa-users"></i>
-                        Our Organization</a></li>
+                    <div th:unless="${user}">
+                        <li class="nav-item"><a class="footer-link" th:href="@{/login}" target="_blank"><i
+                                class="fas fa-sign-in-alt"></i>Login</a></li>
+                        <li class="nav-item"><a class="footer-link" th:href="@{/signup}" target="_blank"><i
+                                class="fas fa-plus"></i> Sign Up</a></li>
+                        <li class="nav-item"><a class="footer-link" href="https://github.com/Todo-Dev"
+                                                target="_blank"><i class="fas fa-users"></i>
+                            Our Organization</a></li>
                     </div>
                     <!-- User -->
-                    <div  th:if="${user}">
-                    <li class="nav-item"><a class="footer-link" href="/myboards" target="_blank"><i class="fas fa-check"></i>My
-                        Boards</a></li>
-                    <li class="nav-item"><a class="footer-link" href="#" target="_blank"><i class="fas fa-plus"></i> Add
-                        Board</a></li>
-                    <li class="nav-item"><a class="footer-link" href="/friends" target="_blank"><i class="fas fa-star"></i>
-                        Friends</a></li>
-                        </div>
+                    <div th:if="${user}">
+                        <li class="nav-item"><a class="footer-link" href="/myboards" target="_blank"><i
+                                class="fas fa-check"></i>My
+                            Boards</a></li>
+                        <li class="nav-item">
+                            <button class="addBoardButton" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <a class="footer-link">
+                                    <span><i class="fas fa-plus"></i></span>
+                                    Add Board</a>
+                            </button>
+                        </li>
+                        <li class="nav-item"><a class="footer-link" href="/friends" target="_blank"><i
+                                class="fas fa-star"></i>
+                            Friends</a></li>
+                    </div>
                 </ul>
             </div>
             <div class="col">
@@ -157,23 +168,23 @@
                 <div class="social">
 
                     <a class="footer-link" href="https://facebook.com" target="_blank">
-                    <i class="fab fa-facebook-f ">
-                    </i>
+                        <i class="fab fa-facebook-f ">
+                        </i>
                     </a>
 
                     <a class="footer-link" href="https://instagram.com" target="_blank">
-                    <i class="fab fa-instagram">
-                    </i>
+                        <i class="fab fa-instagram">
+                        </i>
                     </a>
 
                     <a class="footer-link" href="https://linkedin.com" target="_blank">
-                    <i class="fab fa-linkedin-in">
-                    </i>
+                        <i class="fab fa-linkedin-in">
+                        </i>
                     </a>
 
                     <a class="footer-link" href="https://github.com/Todo-Dev" target="_blank">
-                    <i class="fab fa-github">
-                    </i>
+                        <i class="fab fa-github">
+                        </i>
                     </a>
 
                 </div>
@@ -185,8 +196,41 @@
 </footer>
 <!-- end footer -->
 
+<!--Modal for creating a new board-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Board Information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{/newBoard}" method="post">
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Board Name:</label>
+                        <input type="text" class="form-control" id="recipient-name" name="boardName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Description:</label>
+                        <textarea class="form-control" id="message-text" name="description"></textarea>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-info  me-2 adds">Add</button>
+                        <button type="button" class="btn btn-secondary  me-2 adds" data-bs-dismiss="modal">Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
+<script href="modal.js"></script>
+
 </body>
 </html>
