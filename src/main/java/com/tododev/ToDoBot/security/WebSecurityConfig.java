@@ -58,5 +58,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutSuccessUrl("/").logoutSuccessHandler(myLogoutSuccessHandler);
 
+        http
+                .sessionManagement().maximumSessions(1);
+
     }
 }

@@ -1,5 +1,6 @@
 package com.tododev.ToDoBot.security;
 
+import com.tododev.ToDoBot.repository.ApplicationUserRepository;
 import com.tododev.ToDoBot.service.ActiveUserStore;
 import jdk.nashorn.tools.Shell;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ import java.io.IOException;
 public class MyLogoutSuccessHandler implements LogoutSuccessHandler {
     @Autowired
     ActiveUserStore activeUserStore;
+    @Autowired
+    ApplicationUserRepository applicationUserRepository;
     @Override
     public void onLogoutSuccess(HttpServletRequest request,
                                 HttpServletResponse response, Authentication authentication)
@@ -24,8 +27,8 @@ public class MyLogoutSuccessHandler implements LogoutSuccessHandler {
         System.out.println("hello");
         HttpSession session = request.getSession();
         if (session != null){
-            activeUserStore.users.remove(authentication.getName());
-            session.removeAttribute("user");
+            activeUserStore.getUsers().remove(applicationUserRepository.findApplicationUserByUsername(authentication.getName()).getUsername());
+            session.removeAttribute("myLoggedUser");
         }
         response.sendRedirect("/");
     }

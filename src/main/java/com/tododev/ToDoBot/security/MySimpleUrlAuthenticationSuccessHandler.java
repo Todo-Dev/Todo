@@ -1,5 +1,7 @@
 package com.tododev.ToDoBot.security;
 
+import com.tododev.ToDoBot.model.ApplicationUser;
+import com.tododev.ToDoBot.repository.ApplicationUserRepository;
 import com.tododev.ToDoBot.service.ActiveUserStore;
 import com.tododev.ToDoBot.service.LoggedUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,16 +21,17 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
 
     @Autowired
     ActiveUserStore activeUserStore;
-
+    @Autowired
+    ApplicationUserRepository applicationUserRepository;
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request,
                                         HttpServletResponse response, Authentication authentication)
             throws IOException {
         HttpSession session = request.getSession(false);
         if (session != null) {
-            LoggedUser user = new LoggedUser(authentication.getName(), activeUserStore);
-            activeUserStore.users.add(user.getUsername());
-            session.setAttribute("user", user);
+            ApplicationUser user = applicationUserRepository.findApplicationUserByUsername(authentication.getName());
+            activeUserStore.getUsers().add(user.getUsername());
+            session.setAttribute("myLoggedUser", user);
         }
         response.sendRedirect("/");
 

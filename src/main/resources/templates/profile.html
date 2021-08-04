@@ -202,8 +202,11 @@
                                         <div class="friend" >
                                             <img src="./img/avatar.png" class="rounded-circle" alt="">
                                             <p th:text="${user.getFirstName()}"></p>
+                                            <p th:text="${active.contains(user.getUsername())}">
+
+                                            </p>
                                             <i th:if="${active.contains(user.getUsername())}" class="fas fa-circle online"></i>
-                                            <i th:if="${!active.contains(user.getUsername())}" class="fas fa-circle offline"></i>
+                                            <i th:unless="${active.contains(user.getUsername())}" class="fas fa-circle offline"></i>
                                         </div>
                                     </div>
                                 </div>
