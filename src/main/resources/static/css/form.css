@@ -176,7 +176,9 @@ button {
     background: linear-gradient(#141e30, #243b55);
 
 }
-
+.login-error{
+    color: var(--bs-cyan);
+}
 .login{
     position: relative;
     width: 100%;

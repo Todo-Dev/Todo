@@ -20,7 +20,7 @@
 <div class="login-box">
     <h2>Sign Up</h2>
 
-    <form method="POST" th:action="@{/signup}" id="login">
+    <form method="POST" th:action="@{/signup}" id="login" enctype="multipart/form-data">
         <div class="user-box">
             <input type="text" name="username" required="">
             <label>Username</label>
@@ -49,6 +49,10 @@
             <input type="text" name="profession" required="">
             <label>Profession</label>
         </div>
+<!--        <div class="user-box">-->
+<!--            <input type="file" name="image" accept="image/png, image/jpeg" required/>-->
+<!--            <label>Image</label>-->
+<!--        </div>-->
         <button type="submit">
             <span></span>
             <span></span>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="">
 
 
 <head>
@@ -124,7 +124,7 @@
     <div class="white-box mb-5">
         <div class="container">
             <div class="profil-info">
-                <img class="rounded-circle" src="https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_auto:good%2Cw_300/MTU0NjQzOTk4OTQ4OTkyMzQy/ansel-elgort-poses-for-a-portrait-during-the-baby-driver-premiere-2017-sxsw-conference-and-festivals-on-march-11-2017-in-austin-texas-photo-by-matt-winkelmeyer_getty-imagesfor-sxsw-square.jpg" alt="">
+                <img class="rounded-circle" th:src="@{/img/avatar.png}" alt="">
                 <h2 class="mt-4" th:text="${user.getFirstName()} + ' ' + ${user.getLastName}"></h2>
                 <p th:text="${user.getProfession()}"></p>
                 <p>
