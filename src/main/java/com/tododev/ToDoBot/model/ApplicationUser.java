@@ -51,7 +51,8 @@ public class ApplicationUser implements UserDetails {
     private String email;
     private Date dateOfBirth;
     private String profession;
-
+    @Column(nullable = true, length = 64)
+    private String photos;
     @ManyToMany(mappedBy = "friends")
     Set<ApplicationUser> user = new HashSet<>();
 
@@ -85,6 +86,10 @@ public class ApplicationUser implements UserDetails {
     public ApplicationUser() {
     }
 
+    public void setPhotos(String photos) {
+        this.photos = photos;
+    }
+
     public List<BoardList> getBoardLists() {
         return boardLists;
     }
@@ -93,11 +98,19 @@ public class ApplicationUser implements UserDetails {
         this.username = username;
     }
 
+    public String getPhotos() {
+        return photos;
+    }
 
     public Long getId() {
         return id;
     }
+    @Transient
+    public String getPhotosImagePath() {
+        if (photos == null || id == null) return null;
 
+        return "/user-photos/" + id + "/" + photos;
+    }
     public String getFirstName() {
         return firstName;
     }

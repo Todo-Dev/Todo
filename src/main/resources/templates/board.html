@@ -34,8 +34,10 @@
             </div>
             <form method="post" th:action="@{/newTask}">
                 <div class="modal-body">
-                    <input type="text" name="taskTitle"/>
-                    <input type="text" name="newTaskDescription"/>
+                    <label > Task Title</label><br>
+                    <input type="text" name="taskTitle"/><br>
+                    <label>Task Description</label><br>
+                    <input type="text" name="newTaskDescription"/><br>
                     <input type="text" id="SectionId" name="SectionId" hidden readonly/>
                 </div>
                 <div class="modal-footer">
@@ -53,25 +55,30 @@
 
 <!---->
 <!--Sufian's Work-->
-<!--This modal is to update Task information-->
+
+
+<nav th:replace="fragments/navfrag :: nav"></nav>
 <div>
-    <div class="modal" tabindex="-1" th:attr="id=updateTask">
+    <div class="modal" tabindex="-1" th:attr="id=updateSection">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Update</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                 </div>
-                <form method="post" th:action="@{/task/update}">
+                <form method="post" th:action="@{/section/update}">
                     <div class="modal-body">
-                        <input type="text" id="taskName" name="taskName"/>
-                        <input type="text" th:value="${boardList.id}" name="id" hidden readonly/>
-                        <input type="text" id="taskId" name="taskId" hidden readonly/>
-                        <input type="text" id="taskDescription" name="taskDescription"/>
+                        <label for="secTitle">Section Title</label><br>
+                        <input type="text" id="secTitle" name="secTitle"/><br>
+                        <input type="text" th:value="${boardList.id}" name="id" hidden
+                               readonly/>
+                        <input type="text" id="currentSectionId" name="currentSectionId"
+                               hidden readonly/>
                     </div>
                     <div class="modal-footer">
-                        <input type="submit" value="Update" class="btn btn-info" data-bs-toggle="modal"
-                               data-bs-target="#delete-confirmation">
+                        <input type="submit" value="Update" class="btn btn-info"
+                               data-bs-toggle="modal" data-bs-target="#delete-confirmation">
 
                     </div>
                 </form>
@@ -79,28 +86,56 @@
         </div>
     </div>
 </div>
+<!--This modal is to update Task information-->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Understood</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!---->
-
-<nav th:replace="fragments/navfrag :: nav"></nav>
 <div class="board-body">
     <div class="board-header">
-        <h1 class="board-title" th:text="${boardList.boardName}"></h1>
-        <button type="submit" class="btn update-btn "
-                data-bs-toggle="modal" th:attr="data-bs-target='#updateBoard'+${boardList.id}">
-            Update Board Info
-        </button>
-    </div>
+      <div class="container">
+          <div class="row w-100">
+              <div class="col">
+                 <div class="header-edit"> <h1 class="board-title" th:text="${boardList.boardName}">   </h1>
+                     <a type="submit"  data-bs-toggle="modal" th:attr="data-bs-target='#updateBoard'+${boardList.id}"><i class="fas fa-edit"></i></a></div>
+              </div>
+              <div class="col">
+                  <div class="add-section-part">
 
-<div class="add-section-part">
-    <h3 class="section-form">Section form</h3>
+                      <form class="section-form" th:action="@{/newSection/{id}(id=${boardList.id})}" method="post">
+                          <label>Add New Section</label><br>
+                          <input type="text" name="title" maxlength="25" required/>
+                          <button class="add-section" type="submit"><span><i class="fas fa-plus"></i> </span></button>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+        </div>
 
-    <form class="section-form" th:action="@{/newSection/{id}(id=${boardList.id})}" method="post">
-        <input type="text" name="title" maxlength="25" required/>
-        <button class="add-section" type="submit"><span><i class="fa fa-plus"> </i> </span></button>
-    </form>
-</div>
+      <!--  <button type="submit" class="btn update-btn "
+        //        data-bs-toggle="modal" th:attr="data-bs-target='#updateBoard'+${boardList.id}">
+          //  Update Board Info
+        </button> -->
 
-    <div class="d-flex flex-wrap flex-center">
+
+
+
+    <div class="d-flex flex-wrap flex-center all-card">
         <!--14-->
         <div class="card-container" th:each="sec1 : ${sec2}" style="max-width:18rem;  ">
             <form method="get" th:action="@{/deleteSection/{id}(id=${boardList.id})}">
@@ -123,8 +158,9 @@
 
                 <div class="card-body board-text text-border">
                     <div style="display: flex; justify-content: center;">
-                    <input th:attr="onclick=|createNewTask('${sec1.id}')|" type="button" value="create New Task"
+                    <input th:attr="onclick=|createNewTask('${sec1.id}')|" type="button" value="+"
                            class="btn-info newTask" data-bs-toggle="modal" data-bs-target="#newTask">
+
                     </div>
 
                     <!-- Modal End -->
@@ -221,33 +257,7 @@
 
                         <!--Sufian's Work-->
                         <!--This modal is to update Section information-->
-                        <div>
-                            <div class="modal" tabindex="-1" th:attr="id=updateSection">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Update</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                        </div>
-                                        <form method="post" th:action="@{/section/update}">
-                                            <div class="modal-body">
-                                                <input type="text" id="secTitle" name="secTitle"/>
-                                                <input type="text" th:value="${boardList.id}" name="id" hidden
-                                                       readonly/>
-                                                <input type="text" id="currentSectionId" name="currentSectionId"
-                                                       hidden readonly/>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <input type="submit" value="Update" class="btn btn-info"
-                                                       data-bs-toggle="modal" data-bs-target="#delete-confirmation">
 
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <div>
                         </div>
                     </div>
