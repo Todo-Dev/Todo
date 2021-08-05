@@ -1,0 +1,51 @@
+.gap{
+    display: flex;
+    gap: 1.5rem;
+}
+
+.bg{
+    background-color: #4c544e !important;
+}
+
+.space-edge{
+    margin: 2rem;
+}
+
+.card-container{
+    width: 25%;
+    margin: 20px 0px 20px 0px;
+    display: contents;
+}
+
+.create-board{
+       display: flex;
+       font-size: 90px;
+       justify-content: center;
+       text-decoration: none;
+       color: #0dcaf0;
+       margin-top: 20px;
+
+}
+
+.card-body{
+    text-align: center;
+}
+
+.card-body button{
+    background: none;
+    border: none;
+}
+
+.card-hover {
+    background-color: #f1f1f1;
+}
+
+.card-hover:hover {
+    background-color: #dad9d9;
+}
+
+.card-content{
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+

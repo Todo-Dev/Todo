@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>TODO</title>
+
+</head>
+<body>
+
+<!-- start upper bar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top pt-3 pb-3" th:fragment="nav">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
+                aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand me-4" href="/"><img style="width: 120px;" th:src="@{/img/logo.png}" alt=""></a>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown" th:if="${user}">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        My Account
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" th:href="@{/myboards}"><i class="fas fa-check"></i>My Boards</a>
+                        </li>
+
+
+                        <li>
+                            <button type="button" class="card-text addBoardButton" data-bs-toggle="modal"
+                                    data-bs-target="#addBoard" data-bs-whatever="@mdo">
+                                <a class="dropdown-item"><i class="fas fa-plus"></i> Add Board</a>
+                            </button>
+                        </li>
+
+                        <!--                        <button type="button" class="card-text" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">-->
+                        <!--                            <a class="dropdown-item"><i class="fas fa-plus"></i> Add Board</a>-->
+                        <!--                        </button>-->
+
+
+                        <li><a class="dropdown-item" th:href="@{/friends}"><i class="fas fa-star"></i> Friends</a></li>
+
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/explorer}" th:if="${user}">Explore</a>
+                </li>
+
+            </ul>
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item m-auto" th:unless="${user}">
+                    <a type="button" class="btn btn-info  me-2" th:href="@{/login}">Login</a>
+                </li>
+                <li class="nav-item m-auto" th:unless="${user}">
+                    <a type="button" class="btn btn-secondary  me-2" th:href="@{/signup}">Sign Up</a>
+                </li>
+                <li class="nav-item avatar-img dropdown" th:if="${user}">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false"><img th:src="@{/img/avatar.png}" alt="">
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" th:href="@{/profile}"><i class="far fa-user"></i>My profile</a>
+                        </li>
+                        <li><a class="dropdown-item" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> logout</a>
+
+                        </li>
+
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+<script th:fragment="navbarJs" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+></script>
+
+</body>
+</html>
