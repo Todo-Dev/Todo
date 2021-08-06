@@ -24,15 +24,15 @@ public class MainController {
     @Autowired
     ActiveUserStore activeUserStore;
 
-//    @GetMapping("/")
-//    public String getHomePage(Principal principal , Model model){
-//        if (principal==null){
-//            model.addAttribute("user", null);
-//        }else {
-//            model.addAttribute("user", "data");
-//        }
-//        return "index";
-//    }
+    @GetMapping("/")
+    public String getHomePage(Principal principal , Model model){
+        if (principal==null){
+            model.addAttribute("user", null);
+        }else {
+            model.addAttribute("user", "data");
+        }
+        return "index";
+    }
 
     @GetMapping("/profile")
     public String getProfilePage(Principal principal,Model model) {
