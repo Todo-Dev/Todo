@@ -68,7 +68,7 @@ public class ApplicationUser implements UserDetails {
         return friends;
     }
 
-    @OneToMany(mappedBy = "applicationUser")
+    @OneToMany(mappedBy = "applicationUser" , fetch = FetchType.EAGER)
     @OrderBy("id")
     List<BoardList> boardLists;
 
