@@ -56,7 +56,7 @@ public class ApplicationUser implements UserDetails {
     @ManyToMany(mappedBy = "friends")
     Set<ApplicationUser> user = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "friends",
             joinColumns = { @JoinColumn (name = "user_Id")},
