@@ -56,11 +56,11 @@ public class ApplicationUser implements UserDetails {
     Set<ApplicationUser> user = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinTable(
-//            name = "friends",
-//            joinColumns = { @JoinColumn (name = "user_Id")},
-//            inverseJoinColumns = {@JoinColumn(name = "friend_Id")}
-//    )
+    @JoinTable(
+            name = "friends",
+            joinColumns = { @JoinColumn (name = "user_Id")},
+            inverseJoinColumns = {@JoinColumn(name = "friend_Id")}
+    )
      Set<ApplicationUser> friends = new HashSet<>();
 
     public Set<ApplicationUser> getFriends() {

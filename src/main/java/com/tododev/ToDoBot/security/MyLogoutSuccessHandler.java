@@ -3,6 +3,7 @@ package com.tododev.ToDoBot.security;
 import com.tododev.ToDoBot.repository.ApplicationUserRepository;
 import com.tododev.ToDoBot.service.ActiveUserStore;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.stereotype.Component;

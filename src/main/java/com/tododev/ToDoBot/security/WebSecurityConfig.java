@@ -29,10 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
-    @Bean
-    public ActiveUserStore activeUserStore(){
-        return new ActiveUserStore();
-    }
+//
 
 
     @Override

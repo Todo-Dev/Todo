@@ -22,6 +22,7 @@ public class BoardController {
         }else {
             model.addAttribute("user", "data");
         }
+        assert principal != null;
         model.addAttribute("board",applicationUserRepository.findApplicationUserByUsername(principal.getName()).getBoardLists());
         return "myboards";
     }
