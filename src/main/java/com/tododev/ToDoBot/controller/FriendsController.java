@@ -22,10 +22,11 @@ public class FriendsController {
     ActiveUserStore activeUserStore;
     /**
      * This End Point For getting all user friends
-     * @param principal
-     * @param model
-     * @return
+     *
+     *
+     *
      */
+
     @GetMapping("/friends")
     public String getFriendsPage(Principal principal, Model model){
         if (principal==null){
@@ -36,6 +37,7 @@ public class FriendsController {
         }
 
         model.addAttribute("active", activeUserStore.users);
+        assert principal != null;
         model.addAttribute("friends", applicationUserRepository.findApplicationUserByUsername(principal.getName()).getFriends());
         return "friends";
     }

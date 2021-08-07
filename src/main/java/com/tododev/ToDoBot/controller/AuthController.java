@@ -3,25 +3,18 @@ package com.tododev.ToDoBot.controller;
 import com.tododev.ToDoBot.model.ApplicationUser;
 import com.tododev.ToDoBot.repository.ApplicationUserRepository;
 import com.tododev.ToDoBot.service.ActiveUserStore;
-import com.tododev.ToDoBot.service.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
 
-import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.sql.Date;
 
@@ -57,15 +50,9 @@ public class AuthController {
             , @RequestParam String email
             , @RequestParam Date dateofbirth
             , @RequestParam String profession
-            ) throws ParseException, IOException {
-//        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+            )  {
         ApplicationUser newUser = new ApplicationUser(username , encoder.encode(password) , firstname , lastname , email , dateofbirth , profession , "Add your bio Here");
-//        newUser.setPhotos(fileName);
-//      @RequestParam("image") MultipartFile multipartFile
-        ApplicationUser savedUser = applicationUserRepository.save(newUser);
-//        String uploadDir = "src/main/resources/static/img/" + savedUser.getId();
-//
-//        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+        applicationUserRepository.save(newUser);
         Authentication auth = new UsernamePasswordAuthenticationToken(newUser , null , new ArrayList<>());
         SecurityContextHolder.getContext().setAuthentication(auth);
         activeUserStore.users.add(newUser.getUsername());

@@ -3,7 +3,6 @@ package com.tododev.ToDoBot.model;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import java.sql.Date;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -57,11 +56,11 @@ public class ApplicationUser implements UserDetails {
     Set<ApplicationUser> user = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "friends",
-            joinColumns = { @JoinColumn (name = "user_Id")},
-            inverseJoinColumns = {@JoinColumn(name = "friend_Id")}
-    )
+//    @JoinTable(
+//            name = "friends",
+//            joinColumns = { @JoinColumn (name = "user_Id")},
+//            inverseJoinColumns = {@JoinColumn(name = "friend_Id")}
+//    )
      Set<ApplicationUser> friends = new HashSet<>();
 
     public Set<ApplicationUser> getFriends() {
