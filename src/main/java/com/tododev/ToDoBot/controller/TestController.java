@@ -62,7 +62,7 @@ public class TestController {
 
     @PostMapping("/newSection/{id}")
     public RedirectView newSection(@PathVariable Long id, @RequestParam String title,Model model) {
-        BoardList boardList = boardListRepository.getById(id);
+        BoardList boardList = boardListRepository.findById(id).get();
         sectionRepository.save(new Section(title, boardList));
 
         return new RedirectView("/board/" + id);
@@ -71,7 +71,7 @@ public class TestController {
 
     @PostMapping("/newTask")
     public RedirectView newTask(@RequestParam String taskTitle, String newTaskDescription, Long SectionId) {
-        Section section = sectionRepository.getById(SectionId);
+        Section section = sectionRepository.findById(SectionId).get();
 
         taskRepository.save(new Task(taskTitle, newTaskDescription, section));
 
@@ -101,7 +101,7 @@ public class TestController {
     public RedirectView moveTask(Long taskId,@PathVariable Long id,Long sectionId) {
 
         Queue<Section> sections = new LinkedList<>();
-       BoardList boardList=boardListRepository.getById(id);
+       BoardList boardList=boardListRepository.findById(id).get();
 
         sections.addAll(boardList.getSections());
 
@@ -125,7 +125,7 @@ public class TestController {
     @GetMapping("/moveBack/{id}")
     public RedirectView moveUp(Long taskId,@PathVariable Long id,Long sectionId) {
         Queue<Section> sections = new LinkedList<>();
-        BoardList boardList=boardListRepository.getById(id);
+        BoardList boardList=boardListRepository.findById(id).get();
         boolean bh=false;
         sections.addAll(boardList.getSections());
         Long beforeSection = null;

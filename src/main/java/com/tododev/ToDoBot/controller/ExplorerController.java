@@ -63,7 +63,7 @@ public class ExplorerController {
     @PostMapping("/addFriend/{id}")
     public RedirectView addFriend(@PathVariable Long id , Principal principal){
         ApplicationUser user = applicationUserRepository.findApplicationUserByUsername(principal.getName());
-        ApplicationUser friend = applicationUserRepository.getById(id);
+        ApplicationUser friend = applicationUserRepository.findById(id).get();
         user.getFriends().add(friend);
         applicationUserRepository.save(user);
         return new RedirectView("/explorer");
