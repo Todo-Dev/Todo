@@ -16,10 +16,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     UserDetailsServiceImpl userDetailsService;
-    @Autowired
-    MyLogoutSuccessHandler myLogoutSuccessHandler;
-    @Autowired
-    MySimpleUrlAuthenticationSuccessHandler mySimpleUrlAuthenticationSuccessHandler;
+
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -54,10 +51,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/").successHandler(mySimpleUrlAuthenticationSuccessHandler)
+                .defaultSuccessUrl("/")
                 .and()
                 .logout()
-                .logoutSuccessUrl("/").logoutSuccessHandler(myLogoutSuccessHandler);
+                .logoutSuccessUrl("/");
 
         http
                 .sessionManagement().maximumSessions(1);
