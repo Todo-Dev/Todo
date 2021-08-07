@@ -15,10 +15,10 @@ public class Section {
     @Column(nullable = false)
     private String title;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     BoardList boardList;
 
-    @OneToMany(mappedBy = "section" ,cascade = CascadeType.ALL ,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "section" ,cascade = CascadeType.ALL )
     @OrderBy("id")
     List<Task> taskList;
 

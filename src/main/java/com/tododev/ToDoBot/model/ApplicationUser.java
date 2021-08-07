@@ -55,7 +55,7 @@ public class ApplicationUser implements UserDetails {
     @ManyToMany(mappedBy = "friends")
     Set<ApplicationUser> user = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany()
     @JoinTable(
             name = "friends",
             joinColumns = { @JoinColumn (name = "user_Id")},
@@ -67,7 +67,7 @@ public class ApplicationUser implements UserDetails {
         return friends;
     }
 
-    @OneToMany(mappedBy = "applicationUser" , fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "applicationUser" )
     @OrderBy("id")
     List<BoardList> boardLists;
 
