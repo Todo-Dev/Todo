@@ -16,6 +16,7 @@ import java.io.IOException;
 
 @Component("myLogoutSuccessHandler")
 public class MyLogoutSuccessHandler implements LogoutSuccessHandler {
+    
     @Autowired
     ActiveUserStore activeUserStore;
     @Autowired
