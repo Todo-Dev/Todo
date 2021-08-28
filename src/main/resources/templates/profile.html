@@ -124,7 +124,7 @@
     <div class="white-box mb-5">
         <div class="container">
             <div class="profil-info">
-                <img class="rounded-circle" th:src="@{/img/avatar.png}" alt="">
+                <img class="rounded-circle" th:src="@{'/img/'+${user.getId()}+'/'+${user.getPhotos()}}" alt="">
                 <h2 class="mt-4" th:text="${user.getFirstName()} + ' ' + ${user.getLastName}"></h2>
                 <p th:text="${user.getProfession()}"></p>
                 <p>

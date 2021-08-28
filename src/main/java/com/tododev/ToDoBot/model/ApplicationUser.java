@@ -71,7 +71,7 @@ public class ApplicationUser implements UserDetails {
     @OrderBy("id")
     List<BoardList> boardLists;
 
-    public ApplicationUser(String username, String password, String firstName, String lastName, String email, Date dateOfBirth, String profession , String bio) {
+    public ApplicationUser(String username, String password, String firstName, String lastName, String email, Date dateOfBirth, String profession , String bio ) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
